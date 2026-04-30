@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: Hypegamer Control Plane API
+  version: 1.0.0
+servers:
+  - url: https://api.hypegamer.dev
+paths:
+  /v1/competitions:
+    get:
+      summary: List competitions for current project
+      parameters:
+        - in: query
+          name: game
+          schema: { type: string }
+        - in: query
+          name: status
+          schema: { type: string, enum: [upcoming, live, completed, archived] }
+      responses:
+        "200":
+          description: Competition list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompetitionListResponse"
+  /v1/matches:
+    get:
+      summary: List matches
+      responses:
+        "200":
+          description: Match list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MatchListResponse"
+  /v1/players/{playerId}/skill-profile:
+    get:
+      summary: Fetch skill profile
+      parameters:
+        - in: path
+          name: playerId
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Skill profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SkillProfileResponse"
+  /v1/sources:
+    get:
+      summary: List source health
+      responses:
+        "200":
+          description: Source health response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SourceListResponse"
+components:
+  schemas:
+    Provenance:
+      type: object
+      required: [provenanceTier, sourceSystem, sourceObjectId]
+      properties:
+        provenanceTier:
+          type: string
+          enum: [certified, publisher_authorized, verified_community, community]
+        sourceSystem: { type: string }
+        sourceObjectId: { type: string }
+        sourceDisplayName: { type: string }
+        confidenceScore: { type: number, minimum: 0, maximum: 1 }
+    CompetitionSummary:
+      type: object
+      required: [id, name, status, provenance]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        status: { type: string }
+        startsAt: { type: string, format: date-time }
+        provenance:
+          $ref: "#/components/schemas/Provenance"
+    CompetitionListResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/CompetitionSummary"
+    MatchSummary:
+      type: object
+      required: [id, competitionId, status, participants, provenance]
+      properties:
+        id: { type: string }
+        competitionId: { type: string }
+        status: { type: string }
+        participants:
+          type: array
+          items:
+            type: object
+            required: [entityId, displayName]
+            properties:
+              entityId: { type: string }
+              displayName: { type: string }
+              score: { type: integer }
+        provenance:
+          $ref: "#/components/schemas/Provenance"
+    MatchListResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/MatchSummary"
+    SkillProfileResponse:
+      type: object
+      required: [playerId, titles]
+      properties:
+        playerId: { type: string }
+        titles:
+          type: array
+          items:
+            type: object
+            required: [game, tierLabel, confidenceScore]
+            properties:
+              game: { type: string }
+              tierLabel: { type: string }
+              confidenceScore: { type: number, minimum: 0, maximum: 1 }
+    SourceListResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            required: [id, displayName, status]
+            properties:
+              id: { type: string }
+              displayName: { type: string }
+              status: { type: string, enum: [healthy, degraded, failed, paused] }

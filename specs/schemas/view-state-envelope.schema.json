@@ -1,0 +1,27 @@
+{
+  "$id": "https://hypegamer.dev/schemas/view-state-envelope.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["status", "permissions"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    "requestId": { "type": "string" },
+    "error": {
+      "type": "object",
+      "required": ["code", "message", "retryable"],
+      "properties": {
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "retryable": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "permissions": {
+      "$ref": "./permission-model.schema.json"
+    }
+  },
+  "additionalProperties": false
+}

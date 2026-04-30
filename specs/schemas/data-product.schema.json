@@ -1,0 +1,21 @@
+{
+  "$id": "https://hypegamer.dev/schemas/data-product.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "name", "entityType", "status"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "entityType": { "type": "string", "enum": ["competition", "match", "team", "player"] },
+    "status": { "type": "string", "enum": ["draft", "published", "archived"] },
+    "fieldKeys": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "eligibilityRules": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

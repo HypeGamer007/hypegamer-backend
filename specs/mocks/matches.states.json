@@ -1,0 +1,73 @@
+{
+  "ready": {
+    "items": [
+      {
+        "id": "m_1001",
+        "competitionId": "cmp_100",
+        "status": "live",
+        "scheduledAt": "2026-06-15T18:00:00Z",
+        "participants": [
+          { "entityId": "tm_a", "displayName": "Team Alpha", "score": 1 },
+          { "entityId": "tm_b", "displayName": "Team Beta", "score": 0 }
+        ],
+        "provenance": {
+          "provenanceTier": "publisher_authorized",
+          "sourceSystem": "official_feed",
+          "sourceObjectId": "evt_44",
+          "sourceDisplayName": "Official Event Feed",
+          "confidenceScore": 0.99
+        }
+      }
+    ]
+  },
+  "empty": { "items": [] },
+  "partial": {
+    "items": [
+      {
+        "id": "m_1002",
+        "competitionId": "cmp_100",
+        "status": "scheduled",
+        "scheduledAt": "2026-06-15T20:00:00Z",
+        "participants": [
+          { "entityId": "tm_c", "displayName": "Team Gamma" },
+          { "entityId": "tm_d", "displayName": "Team Delta" }
+        ],
+        "provenance": {
+          "provenanceTier": "community",
+          "sourceSystem": "community_import",
+          "sourceObjectId": "comm_1022",
+          "restrictedReason": "awaiting verification"
+        }
+      }
+    ],
+    "warning": "scores missing for one or more participants"
+  },
+  "error": {
+    "requestId": "req_match_503_01",
+    "error": {
+      "code": "UPSTREAM_TIMEOUT",
+      "message": "Timed out while fetching match feed.",
+      "retryable": true
+    }
+  },
+  "restricted": {
+    "items": [
+      {
+        "id": "m_redacted_01",
+        "competitionId": "cmp_200",
+        "status": "completed",
+        "scheduledAt": "2026-06-16T01:00:00Z",
+        "participants": [],
+        "provenance": {
+          "provenanceTier": "certified",
+          "sourceSystem": "restricted_feed",
+          "sourceObjectId": "r_22",
+          "restrictedReason": "policy_scope_limited"
+        }
+      }
+    ]
+  },
+  "denied": {
+    "reason": "role does not include match access for this workspace"
+  }
+}

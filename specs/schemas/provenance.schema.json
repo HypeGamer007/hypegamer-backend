@@ -1,0 +1,25 @@
+{
+  "$id": "https://hypegamer.dev/schemas/provenance.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["provenanceTier", "sourceSystem", "sourceObjectId"],
+  "properties": {
+    "provenanceTier": {
+      "type": "string",
+      "enum": ["certified", "publisher_authorized", "verified_community", "community"]
+    },
+    "sourceSystem": { "type": "string" },
+    "sourceObjectId": { "type": "string" },
+    "sourceDisplayName": { "type": "string" },
+    "firstSeenAt": { "type": "string", "format": "date-time" },
+    "lastSeenAt": { "type": "string", "format": "date-time" },
+    "confidenceScore": { "type": "number", "minimum": 0, "maximum": 1 },
+    "isCertified": { "type": "boolean" },
+    "isPublisherAuthorized": { "type": "boolean" },
+    "isCommunity": { "type": "boolean" },
+    "lineageCount": { "type": "integer", "minimum": 0 },
+    "correctionCount": { "type": "integer", "minimum": 0 },
+    "restrictedReason": { "type": "string" }
+  },
+  "additionalProperties": false
+}

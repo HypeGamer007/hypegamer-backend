@@ -1,0 +1,13 @@
+{
+  "$id": "https://hypegamer.dev/schemas/permission-model.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["canView", "canEdit"],
+  "properties": {
+    "canView": { "type": "boolean" },
+    "canEdit": { "type": "boolean" },
+    "canAdmin": { "type": "boolean" },
+    "reason": { "type": "string" }
+  },
+  "additionalProperties": false
+}

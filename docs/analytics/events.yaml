@@ -1,0 +1,157 @@
+version: 1
+owner: analytics
+events:
+  - name: workspace_opened
+    phase: 0
+    trigger: workspace shell route loaded
+    payload:
+      workspaceId: string
+      projectId: string
+      role: string
+      environment: string
+  - name: permission_denied_viewed
+    phase: 0
+    trigger: denied state rendered
+    payload:
+      routeId: string
+      role: string
+      reason: string
+  - name: sandbox_seeded
+    phase: 0
+    trigger: sandbox dataset successfully loaded
+    payload:
+      workspaceId: string
+      projectId: string
+      fixtureSet: string
+      source: string
+  - name: setup_cta_clicked
+    phase: 0
+    trigger: onboarding wizard primary navigation or skip
+    payload:
+      action: string
+      environment: string
+      demoLoaded: boolean
+  - name: empty_state_cta_clicked
+    phase: 0
+    trigger: empty state primary or secondary button
+    payload:
+      analyticsId: string
+      action: string
+  - name: home_viewed
+    phase: 1
+    trigger: home route ready state viewed
+    payload:
+      demoSeeded: boolean
+      fixture: string
+  - name: competition_viewed
+    phase: 1
+    trigger: competition detail opened
+    payload:
+      competitionId: string
+      provenanceTier: string
+  - name: match_viewed
+    phase: 1
+    trigger: match detail opened
+    payload:
+      matchId: string
+      competitionId: string
+      provenanceTier: string
+  - name: source_viewed
+    phase: 1
+    trigger: source detail opened
+    payload:
+      sourceId: string
+      status: string
+      provenanceTier: string
+  - name: filter_applied
+    phase: 1
+    trigger: list filter changed or cleared
+    payload:
+      analyticsId: string
+      param: string
+      value: string
+      action: string
+  - name: source_paused
+    phase: 1
+    trigger: source pause confirmed
+    payload:
+      sourceId: string
+      impactedProductCount: number
+  - name: identity_link_completed
+    phase: 2
+    trigger: account linking completed
+    payload:
+      playerId: string
+      provider: string
+      verificationState: string
+  - name: consent_revoked
+    phase: 2
+    trigger: consent grant revoked
+    payload:
+      playerId: string
+      consentType: string
+  - name: merge_applied
+    phase: 2
+    trigger: entity merge resolution confirmed
+    payload:
+      reviewerId: string
+      confidenceBand: string
+  - name: data_product_created
+    phase: 3
+    trigger: product draft created
+    payload:
+      dataProductId: string
+      entityType: string
+  - name: widget_published
+    phase: 3
+    trigger: widget publish action confirmed
+    payload:
+      widgetId: string
+      environment: string
+  - name: api_key_created
+    phase: 3
+    trigger: new API key generated
+    payload:
+      projectId: string
+      keyType: string
+  - name: partner_access_granted
+    phase: 4
+    trigger: partner grant approved
+    payload:
+      partnerOrgId: string
+      scopeCount: number
+      expiresAt: string
+  - name: trust_signal_reviewed
+    phase: 4
+    trigger: trust signal disposition submitted
+    payload:
+      signalId: string
+      disposition: string
+      severity: string
+  - name: role_changed
+    phase: 4
+    trigger: role matrix update saved
+    payload:
+      actorId: string
+      targetRole: string
+      routeScope: string
+  - name: search_run
+    phase: 5
+    trigger: global search executed
+    payload:
+      queryLength: number
+      resultCount: number
+      restrictedCount: number
+  - name: notification_opened
+    phase: 5
+    trigger: notification item opened
+    payload:
+      notificationId: string
+      type: string
+      deepLinkRoute: string
+  - name: flag_enabled
+    phase: 5
+    trigger: feature flag enabled for cohort
+    payload:
+      flagKey: string
+      cohortId: string

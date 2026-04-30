@@ -1,0 +1,30 @@
+{
+  "ready": {
+    "items": [
+      {
+        "id": "src_ok_01",
+        "displayName": "Official Event Feed",
+        "status": "healthy",
+        "lastUpdatedAt": "2026-05-10T10:00:00Z",
+        "provenanceTier": "publisher_authorized"
+      },
+      {
+        "id": "src_fail_02",
+        "displayName": "Community Bracket Import",
+        "status": "failed",
+        "lastUpdatedAt": "2026-05-09T08:40:00Z",
+        "provenanceTier": "community",
+        "restrictedReason": "Not eligible for certified products"
+      }
+    ]
+  },
+  "empty": { "items": [] },
+  "error": {
+    "requestId": "req_src_500_01",
+    "error": {
+      "code": "SOURCE_SERVICE_FAILURE",
+      "message": "Could not load source health summary.",
+      "retryable": true
+    }
+  }
+}

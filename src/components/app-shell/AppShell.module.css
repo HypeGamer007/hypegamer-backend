@@ -1,0 +1,72 @@
+.root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.link {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+}
+
+.link:hover {
+  color: var(--color-text);
+  background: var(--color-surface-elevated);
+}
+
+.linkActive {
+  color: var(--color-text);
+  background: var(--color-surface-elevated);
+}
+
+.shellBody {
+  flex: 1;
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.checklistCol {
+  width: 280px;
+  flex-shrink: 0;
+  padding: var(--space-5) 0 var(--space-5) var(--space-5);
+}
+
+.mainCol {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-5);
+}
+
+@media (max-width: 960px) {
+  .shellBody {
+    flex-direction: column;
+  }
+
+  .checklistCol {
+    width: 100%;
+    padding: var(--space-4) var(--space-5) 0;
+  }
+}

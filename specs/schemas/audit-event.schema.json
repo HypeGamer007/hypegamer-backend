@@ -1,0 +1,18 @@
+{
+  "$id": "https://hypegamer.dev/schemas/audit-event.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "actorId", "action", "targetType", "targetId", "createdAt"],
+  "properties": {
+    "id": { "type": "string" },
+    "actorId": { "type": "string" },
+    "action": { "type": "string" },
+    "targetType": { "type": "string" },
+    "targetId": { "type": "string" },
+    "before": {},
+    "after": {},
+    "requestId": { "type": "string" },
+    "createdAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

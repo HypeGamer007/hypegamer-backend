@@ -1,0 +1,35 @@
+{
+  "workspace": {
+    "id": "ws_demo_01",
+    "name": "Hypegamer Demo Workspace"
+  },
+  "project": {
+    "id": "prj_val_01",
+    "name": "Valorant Control Plane",
+    "environment": "sandbox"
+  },
+  "roles": [
+    "org_admin",
+    "project_admin",
+    "developer",
+    "publisher_reviewer",
+    "integrity_reviewer",
+    "broadcaster",
+    "viewer",
+    "player_user"
+  ],
+  "featureFlags": {
+    "cp.home.enabled": true,
+    "cp.competitions.enabled": true,
+    "cp.matches.enabled": true,
+    "cp.entities.enabled": true,
+    "cp.identity.enabled": true,
+    "cp.data_products.enabled": true,
+    "cp.widgets.enabled": true,
+    "cp.developers.enabled": true,
+    "cp.partners.enabled": true,
+    "cp.trust.enabled": true,
+    "cp.settings.enabled": true,
+    "cp.search.enabled": true
+  }
+}

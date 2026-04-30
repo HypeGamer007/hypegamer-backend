@@ -1,0 +1,83 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-4);
+}
+
+.card {
+  grid-column: span 6;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+
+.h2 {
+  margin: 0 0 var(--space-3) 0;
+  font-size: 1rem;
+}
+
+.list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.muted {
+  color: var(--color-text-muted);
+  margin-top: 0;
+}
+
+.actionsRow {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.btn {
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th {
+  text-align: left;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  padding: 10px 12px;
+}
+
+.td {
+  border-bottom: 1px solid var(--color-border);
+  padding: 10px 12px;
+}
+
+.linkBtn {
+  border: none;
+  background: transparent;
+  color: var(--color-accent);
+  padding: 0;
+  text-decoration: underline;
+}
+
+.linkBtn:disabled {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  cursor: default;
+}
+
+@media (max-width: 920px) {
+  .card {
+    grid-column: span 12;
+  }
+}
+

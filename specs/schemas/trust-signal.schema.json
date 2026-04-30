@@ -1,0 +1,15 @@
+{
+  "$id": "https://hypegamer.dev/schemas/trust-signal.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "subjectType", "subjectId", "severity", "status"],
+  "properties": {
+    "id": { "type": "string" },
+    "subjectType": { "type": "string", "enum": ["player", "team", "match"] },
+    "subjectId": { "type": "string" },
+    "severity": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+    "status": { "type": "string", "enum": ["open", "in_review", "resolved", "dismissed"] },
+    "restrictedEvidence": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

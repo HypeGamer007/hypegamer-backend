@@ -1,0 +1,41 @@
+{
+  "$id": "https://hypegamer.dev/schemas/match-summary.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "competitionId", "status", "scheduledAt", "participants", "provenance"],
+  "properties": {
+    "id": { "type": "string" },
+    "competitionId": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["scheduled", "live", "paused", "completed", "disputed", "corrected", "voided"]
+    },
+    "scheduledAt": { "type": "string", "format": "date-time" },
+    "participants": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["entityId", "displayName"],
+        "properties": {
+          "entityId": { "type": "string" },
+          "displayName": { "type": "string" },
+          "score": { "type": "integer" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "freshness": {
+      "type": "object",
+      "properties": {
+        "lastUpdatedAt": { "type": "string", "format": "date-time" },
+        "state": { "type": "string", "enum": ["live", "recent", "stale", "failed"] }
+      },
+      "additionalProperties": false
+    },
+    "provenance": {
+      "$ref": "./provenance.schema.json"
+    }
+  },
+  "additionalProperties": false
+}

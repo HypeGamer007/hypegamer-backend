@@ -1,0 +1,40 @@
+.nav {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.sep {
+  color: var(--color-border);
+  user-select: none;
+}
+
+.link {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+.current {
+  color: var(--color-text);
+  font-weight: 500;
+}

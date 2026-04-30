@@ -1,0 +1,168 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-04-29T00:00:00Z",
+  "routes": [
+    {
+      "id": "onboarding",
+      "path": "/onboarding",
+      "phase": 0,
+      "owner": "frontend",
+      "featureFlag": "cp.onboarding.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "developer", "publisher_reviewer", "integrity_reviewer", "broadcaster", "viewer"],
+      "supportsStates": ["ready"]
+    },
+    {
+      "id": "home",
+      "path": "/home",
+      "phase": 1,
+      "owner": "frontend",
+      "featureFlag": "cp.home.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "developer", "publisher_reviewer", "integrity_reviewer", "broadcaster", "viewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "competitions",
+      "path": "/competitions",
+      "phase": 1,
+      "owner": "frontend",
+      "featureFlag": "cp.competitions.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer", "integrity_reviewer", "viewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "matches",
+      "path": "/matches",
+      "phase": 1,
+      "owner": "frontend",
+      "featureFlag": "cp.matches.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer", "integrity_reviewer", "broadcaster", "viewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "sources",
+      "path": "/sources",
+      "phase": 1,
+      "owner": "frontend",
+      "featureFlag": "cp.sources.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer", "integrity_reviewer", "viewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "competition_detail",
+      "path": "/competitions/:competitionId",
+      "phase": 1,
+      "owner": "frontend",
+      "featureFlag": "cp.competitions.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer", "integrity_reviewer", "viewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "match_detail",
+      "path": "/matches/:matchId",
+      "phase": 1,
+      "owner": "frontend",
+      "featureFlag": "cp.matches.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer", "integrity_reviewer", "broadcaster", "viewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "source_detail",
+      "path": "/sources/:sourceId",
+      "phase": 1,
+      "owner": "frontend",
+      "featureFlag": "cp.sources.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer", "integrity_reviewer", "viewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "entities",
+      "path": "/entities",
+      "phase": 2,
+      "owner": "frontend",
+      "featureFlag": "cp.entities.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer", "integrity_reviewer", "viewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "entity_detail",
+      "path": "/entities/:entityId",
+      "phase": 2,
+      "owner": "frontend",
+      "featureFlag": "cp.entities.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer", "integrity_reviewer", "viewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "identity",
+      "path": "/identity",
+      "phase": 2,
+      "owner": "frontend",
+      "featureFlag": "cp.identity.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer", "integrity_reviewer", "player_user"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "data_products",
+      "path": "/data-products",
+      "phase": 3,
+      "owner": "frontend",
+      "featureFlag": "cp.data_products.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "widgets",
+      "path": "/widgets",
+      "phase": 3,
+      "owner": "frontend",
+      "featureFlag": "cp.widgets.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "broadcaster"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "developers",
+      "path": "/developers",
+      "phase": 3,
+      "owner": "frontend",
+      "featureFlag": "cp.developers.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "developer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "partners",
+      "path": "/partners",
+      "phase": 4,
+      "owner": "frontend",
+      "featureFlag": "cp.partners.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "trust",
+      "path": "/trust",
+      "phase": 4,
+      "owner": "frontend",
+      "featureFlag": "cp.trust.enabled",
+      "allowedRoles": ["org_admin", "integrity_reviewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "audit_settings",
+      "path": "/settings",
+      "phase": 4,
+      "owner": "frontend",
+      "featureFlag": "cp.settings.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "viewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    },
+    {
+      "id": "search_notifications",
+      "path": "/search",
+      "phase": 5,
+      "owner": "frontend",
+      "featureFlag": "cp.search.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "developer", "publisher_reviewer", "integrity_reviewer", "broadcaster", "viewer"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+    }
+  ]
+}

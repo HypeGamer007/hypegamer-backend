@@ -1,0 +1,69 @@
+:root {
+  --color-bg: #0f1419;
+  --color-surface: #1a2332;
+  --color-surface-elevated: #243044;
+  --color-border: #2d3a4d;
+  --color-text: #e8edf4;
+  --color-text-muted: #8b9ab0;
+  --color-accent: #3d8bfd;
+  --color-accent-hover: #5ca0ff;
+  --color-success: #34c759;
+  --color-warning: #ff9f0a;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --shadow-window: 0 12px 40px rgba(0, 0, 0, 0.35);
+  --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

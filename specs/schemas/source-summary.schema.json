@@ -1,0 +1,14 @@
+{
+  "$id": "https://hypegamer.dev/schemas/source-summary.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "displayName", "status"],
+  "properties": {
+    "id": { "type": "string" },
+    "displayName": { "type": "string" },
+    "status": { "type": "string", "enum": ["healthy", "degraded", "failed", "paused"] },
+    "lastUpdatedAt": { "type": "string", "format": "date-time" },
+    "restrictedReason": { "type": "string" }
+  },
+  "additionalProperties": false
+}

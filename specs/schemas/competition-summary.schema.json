@@ -1,0 +1,15 @@
+{
+  "$id": "https://hypegamer.dev/schemas/competition-summary.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "name", "game", "status", "startsAt", "provenance"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "game": { "type": "string" },
+    "status": { "type": "string", "enum": ["upcoming", "live", "completed", "archived"] },
+    "startsAt": { "type": "string", "format": "date-time" },
+    "provenance": { "$ref": "./provenance.schema.json" }
+  },
+  "additionalProperties": false
+}
