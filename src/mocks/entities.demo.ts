@@ -12,11 +12,25 @@ export interface EntitySummaryRow {
   provenance: string;
 }
 
+export interface MergeSuggestion {
+  intoEntityId: string;
+  intoDisplayName: string;
+  confidenceBand: "high" | "medium" | "low";
+  rationale: string;
+}
+
+export interface SkillCoverageViewModel {
+  band: "high" | "medium" | "low";
+  rankedMatchSamples: number;
+}
+
 export interface EntityProfile extends EntitySummaryRow {
   aliases: string[];
   notes?: string;
   roster?: Array<{ id: string; displayName: string; role?: string }>;
   linkedAccounts: Array<{ provider: "steam" | "riot" | "twitch" | "epic"; handle: string; status: "linked" | "pending" | "error" }>;
+  mergeSuggestion?: MergeSuggestion;
+  skillCoverage?: SkillCoverageViewModel;
 }
 
 export const DEMO_ENTITIES: EntityProfile[] = [
@@ -49,6 +63,7 @@ export const DEMO_ENTITIES: EntityProfile[] = [
     provenance: "Community",
     aliases: ["AstraRL", "Astra_7"],
     linkedAccounts: [{ provider: "steam", handle: "astra-7", status: "linked" }],
+    skillCoverage: { band: "high", rankedMatchSamples: 48 },
   },
   {
     id: "player_201",
@@ -64,6 +79,14 @@ export const DEMO_ENTITIES: EntityProfile[] = [
       { provider: "steam", handle: "kestrel", status: "error" },
       { provider: "twitch", handle: "kestrel_live", status: "linked" },
     ],
+    skillCoverage: { band: "medium", rankedMatchSamples: 14 },
+    mergeSuggestion: {
+      intoEntityId: "player_200",
+      intoDisplayName: "Astra",
+      confidenceBand: "medium",
+      rationale:
+        "Shared recovery signals on Steam plus overlapping alias timing suggest a single underlying roster identity.",
+    },
   },
   {
     id: "team_101",
@@ -85,8 +108,10 @@ export const DEMO_ENTITIES: EntityProfile[] = [
     primaryGame: "Valorant",
     lastUpdatedAt: "2026-05-02T16:30:00Z",
     provenance: "Community",
-    aliases: ["NovaV", "novaaa"],
+    /** Duplicate literal appears twice — UI should surface duplicate-source cues without changing the canonical name. */
+    aliases: ["NovaV", "novaaa", "NovaV"],
     linkedAccounts: [{ provider: "riot", handle: "Nova#HG", status: "linked" }],
+    skillCoverage: { band: "low", rankedMatchSamples: 3 },
   },
 ];
 

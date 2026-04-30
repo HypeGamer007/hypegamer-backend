@@ -12,6 +12,7 @@ import {
   ensureDefaultConsent,
   linkDemoAccount,
   readConsentGrants,
+  readIdentityAuditLog,
   readLinkedAccounts,
   revokeConsent,
 } from "@/lib/identityStore";
@@ -45,6 +46,7 @@ export function IdentityPage() {
 
   const linked = useMemo(() => readLinkedAccounts(), [tick]);
   const consent = useMemo(() => readConsentGrants(), [tick]);
+  const auditLog = useMemo(() => readIdentityAuditLog(), [tick]);
 
   const partialBanner =
     fx.rawFixture === "partial" ? "Some identity graph edges may be withheld under policy." : undefined;
@@ -140,10 +142,7 @@ export function IdentityPage() {
             <h2 id="consent-h" className={styles.h2}>
               Consent registry
             </h2>
-            <p className={styles.muted}>
-              Revocations apply immediately and are captured as auditable events. A later phase will show the audit trail
-              inline.
-            </p>
+            <p className={styles.muted}>Revocations apply immediately and append to the audit trail below.</p>
 
             <table className={styles.table}>
               <thead>
@@ -174,6 +173,34 @@ export function IdentityPage() {
                 ))}
               </tbody>
             </table>
+          </section>
+
+          <section className={styles.card} aria-labelledby="audit-h">
+            <h2 id="audit-h" className={styles.h2}>
+              Audit trail (demo)
+            </h2>
+            {auditLog.length ? (
+              <table className={styles.table} data-testid="identity-audit-log">
+                <thead>
+                  <tr>
+                    <th className={styles.th}>Time</th>
+                    <th className={styles.th}>Event</th>
+                    <th className={styles.th}>Detail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {auditLog.map((e) => (
+                    <tr key={e.id}>
+                      <td className={styles.td}>{new Date(e.at).toLocaleString()}</td>
+                      <td className={styles.td}>{e.kind === "consent_revoked" ? "Consent revoked" : e.kind}</td>
+                      <td className={styles.td}>{e.summary}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p className={styles.muted}>No auditable identity events in this browser session yet.</p>
+            )}
           </section>
         </div>
 

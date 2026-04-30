@@ -16,3 +16,8 @@ export const STORAGE_EXTRA_DATA_PRODUCTS = "hypegamer_extra_data_products";
 export const STORAGE_WIDGET_PUBLISHED_IDS = "hypegamer_widget_published_ids";
 /** API keys created after reveal-once flow (masked secrets only). */
 export const STORAGE_EXTRA_API_KEYS = "hypegamer_extra_api_keys";
+
+/** Append-only demo log for entity merge confirmations (reviewer actions). */
+export const STORAGE_ENTITY_MERGE_AUDIT = "hypegamer_entity_merge_audit_v1";
+/** Append-only demo log for identity consent changes (audit trail UI). */
+export const STORAGE_IDENTITY_AUDIT = "hypegamer_identity_audit_v1";

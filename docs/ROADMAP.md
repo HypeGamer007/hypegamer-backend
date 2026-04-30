@@ -50,8 +50,8 @@ This file summarizes what exists in the repo today versus the phased PRD, so del
 | Area | Status | Notes |
 |------|--------|------|
 | `/entities`, `/entities/:entityId` | **Shipped** | List + detail, filters, sort, `RouteViewRoot`, demo fixtures |
-| `/identity` | **Shipped** | Link/revoke demo, consent table, telemetry |
-| E2E | **Shipped** | `identity-and-skill.spec.ts` covers entities navigation + identity flows |
+| `/identity` | **Shipped** | Link/revoke demo, consent table, inline audit trail, telemetry |
+| E2E | **Shipped** | `identity-and-skill.spec.ts` covers entities navigation, merge reviewer gates, skill/alias cues, identity flows |
 
 ---
 

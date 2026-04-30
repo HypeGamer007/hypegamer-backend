@@ -15,7 +15,8 @@ export default defineConfig({
   webServer: {
     command: "npm run dev",
     url: "http://localhost:5173",
-    reuseExistingServer: !process.env.CI,
+    // Reusing a dev server can run e2e against a stale bundle. Opt in with PW_REUSE_SERVER=1.
+    reuseExistingServer: process.env.PW_REUSE_SERVER === "1",
     timeout: 120000,
   },
 });

@@ -9,11 +9,11 @@ function read(): boolean {
 
 export function useDemoSeeded(): boolean {
   const location = useLocation();
-  const [seeded, setSeeded] = useState(read);
+  const [seeded, setSeeded] = useState(() => read());
 
   useEffect(() => {
     setSeeded(read());
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
 
   useEffect(() => {
     return subscribeSetupChanged(() => setSeeded(read()));

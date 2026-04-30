@@ -9,6 +9,7 @@
 
 ## Not yet in mock UI (keep for backend / hardening phases)
 
+- [ ] Stronger automated checks (optional): assert `window.__HG_TELEMETRY__` entries for Phase 3 events after actions.
 - [ ] Data-product builder blocks invalid source/policy combinations server-side (UI shows policy note for player extracts only).
 - [ ] Widget preview iframe / live embed parity beyond banner copy.
 - [ ] Publish/unpublish workflows reflect **live** policy restrictions from API.

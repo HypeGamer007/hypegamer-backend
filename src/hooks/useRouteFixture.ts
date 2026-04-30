@@ -62,8 +62,25 @@ export function useRouteFixture(): RouteFixtureState {
         break;
     }
 
-    if (role === "viewer") {
-      permissions = { canView: true, canEdit: false, canAdmin: false, reason: "Viewer role" };
+    if (role === "viewer" || role === "player_user") {
+      permissions = {
+        canView: true,
+        canEdit: false,
+        canAdmin: false,
+        reason:
+          role === "player_user"
+            ? "Player profile: view and manage own consent, but merge confirmation requires a reviewer."
+            : "Viewer role",
+      };
+    }
+
+    if (role === "integrity_reviewer" || role === "publisher_reviewer") {
+      permissions = {
+        canView: true,
+        canEdit: true,
+        canAdmin: false,
+        reason: "Reviewer role",
+      };
     }
 
     return { rawFixture, status, permissions, requestId, restricted };

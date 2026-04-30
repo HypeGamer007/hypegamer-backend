@@ -11,6 +11,8 @@ npm install
 npm run dev
 ```
 
+Playwright starts its own dev server by default (avoids stale bundles). To reuse one you already have on port 5173: `PW_REUSE_SERVER=1 npx playwright test`.
+
 Open `/onboarding` for the setup wizard, or `/home` after completing onboarding (stored in `localStorage`).
 
 ## Contents

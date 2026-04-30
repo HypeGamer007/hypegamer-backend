@@ -10,6 +10,7 @@ export type TelemetryEventName =
   | "source_paused"
   | "identity_link_completed"
   | "consent_revoked"
+  | "merge_applied"
   | "empty_state_cta_clicked"
   | "filter_applied"
   | "data_product_created"

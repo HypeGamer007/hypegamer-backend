@@ -1,4 +1,5 @@
 import { track } from "@/lib/telemetry";
+import { STORAGE_IDENTITY_AUDIT } from "@/lib/storageKeys";
 
 export type LinkedProvider = "steam" | "riot" | "twitch" | "epic";
 
@@ -18,6 +19,35 @@ export interface ConsentGrant {
 
 const KEY_LINKED = "hypegamer_identity_linked_v1";
 const KEY_CONSENT = "hypegamer_identity_consent_v1";
+
+export type IdentityAuditEntry = {
+  id: string;
+  at: string;
+  kind: "consent_revoked";
+  consentType: string;
+  summary: string;
+};
+
+function parseJson<T>(raw: string | null, fallback: T): T {
+  if (!raw) return fallback;
+  try {
+    return JSON.parse(raw) as T;
+  } catch {
+    return fallback;
+  }
+}
+
+export function readIdentityAuditLog(): IdentityAuditEntry[] {
+  return parseJson<IdentityAuditEntry[]>(localStorage.getItem(STORAGE_IDENTITY_AUDIT), []);
+}
+
+function writeIdentityAuditLog(next: IdentityAuditEntry[]) {
+  localStorage.setItem(STORAGE_IDENTITY_AUDIT, JSON.stringify(next));
+}
+
+function appendIdentityAudit(entry: IdentityAuditEntry) {
+  writeIdentityAuditLog([entry, ...readIdentityAuditLog()]);
+}
 
 export function readLinkedAccounts(): LinkedAccount[] {
   try {
@@ -81,7 +111,9 @@ export function ensureDefaultConsent() {
 
 export function revokeConsent(consentId: string) {
   const now = new Date().toISOString();
-  const next = readConsentGrants().map((c) =>
+  const before = readConsentGrants();
+  const target = before.find((c) => c.id === consentId);
+  const next = before.map((c) =>
     c.id === consentId ? { ...c, status: "revoked" as const, updatedAt: now } : c,
   );
   try {
@@ -89,9 +121,17 @@ export function revokeConsent(consentId: string) {
   } catch {
     /* ignore */
   }
+  const consentType = target?.consentType ?? consentId;
   track("consent_revoked", {
     playerId: "demo_player",
-    consentType: consentId,
+    consentType,
+  });
+  appendIdentityAudit({
+    id: `audit_${crypto.randomUUID().replace(/-/g, "").slice(0, 12)}`,
+    at: now,
+    kind: "consent_revoked",
+    consentType,
+    summary: `Consent “${consentType}” revoked for demo_player (immediate effect).`,
   });
 }
 
