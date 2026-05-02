@@ -105,3 +105,24 @@ test("integrator tab change emits integrator_hub_viewed", async ({ page }) => {
   await expect(page).toHaveURL(/tab=roi/);
   await expectTelemetryHasEvent(page, "integrator_hub_viewed");
 });
+
+test("notification deep link emits notification_opened", async ({ page }) => {
+  await page.addInitScript(seedWorkspace());
+  await page.goto("/home");
+  await expect(page.getByTestId("view-status")).toContainText("ready");
+  await page.getByTestId("notifications-menu-trigger").click();
+  await expect(page.getByTestId("notifications-menu-panel")).toBeVisible();
+  await resetTelemetry(page);
+  await page.getByRole("link", { name: /Trust: net worth swing triaged/ }).click();
+  await expectTelemetryHasEvent(page, "notification_opened");
+  await expect(page).toHaveURL(/\/trust/);
+});
+
+test("home integrator CTA navigates to hub", async ({ page }) => {
+  await page.addInitScript(seedWorkspace());
+  await page.goto("/home");
+  await expect(page.getByTestId("home-integrator-cta")).toBeVisible();
+  await page.getByTestId("home-integrator-cta").getByRole("link", { name: "Open Integrator hub" }).click();
+  await expect(page).toHaveURL(/\/integrator\?tab=connect/);
+  await expect(page.getByTestId("view-status")).toContainText("ready");
+});
