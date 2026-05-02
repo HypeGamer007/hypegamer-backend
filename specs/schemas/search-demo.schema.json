@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hypegamer.dev/schemas/search-demo.schema.json",
+  "title": "Workspace search demo fixture",
+  "type": "object",
+  "required": ["version", "hintQueries", "results"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string" },
+    "hintQueries": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "subtitle", "route", "matchTerms"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "subtitle": { "type": "string" },
+          "route": { "type": "string" },
+          "matchTerms": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

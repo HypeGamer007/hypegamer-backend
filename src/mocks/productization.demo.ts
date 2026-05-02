@@ -5,6 +5,8 @@ export type DataProductRow = {
   status: "draft" | "published" | "archived";
   fieldCount: number;
   updatedAt: string;
+  /** When omitted, UI treats extracts as certified-safe for coarse policy hints. */
+  ingestionTier?: "certified" | "community";
 };
 
 export type WidgetRow = {
@@ -28,37 +30,47 @@ export type ApiKeyRow = {
 export const DEMO_DATA_PRODUCTS: DataProductRow[] = [
   {
     id: "dp_comp_spring",
-    name: "Spring leaderboard feed",
+    name: "Ancient Major leaderboard extract",
     entityType: "competition",
     status: "published",
     fieldCount: 12,
     updatedAt: "2026-04-28T14:00:00.000Z",
+    ingestionTier: "certified",
   },
   {
     id: "dp_match_odds",
-    name: "Match odds snapshot",
+    name: "Lane GPM snapshot",
     entityType: "match",
     status: "draft",
     fieldCount: 6,
     updatedAt: "2026-04-27T09:30:00.000Z",
+    ingestionTier: "community",
   },
 ];
 
 export const DEMO_WIDGETS: WidgetRow[] = [
   {
     id: "wg_leaderboard_sbx",
-    title: "Leaderboard embed",
+    title: "Ancient lane scoreboard",
     environment: "sandbox",
     status: "published",
-    productName: "Spring leaderboard feed",
+    productName: "Ancient Major leaderboard extract",
     updatedAt: "2026-04-28T15:10:00.000Z",
   },
   {
+    id: "wg_scaffold_draft",
+    title: "Draft-phase ticker",
+    environment: "sandbox",
+    status: "draft",
+    productName: "Ancient Major leaderboard extract",
+    updatedAt: "2026-04-30T12:00:00.000Z",
+  },
+  {
     id: "wg_odds_live",
-    title: "Odds ticker",
+    title: "Live GPM ribbon",
     environment: "live",
     status: "draft",
-    productName: "Match odds snapshot",
+    productName: "Lane GPM snapshot",
     updatedAt: "2026-04-26T11:00:00.000Z",
   },
 ];
@@ -66,7 +78,7 @@ export const DEMO_WIDGETS: WidgetRow[] = [
 export const DEMO_API_KEYS: ApiKeyRow[] = [
   {
     id: "key_ingest_1",
-    label: "Ingest worker (eu-west)",
+    label: "Shard ingest worker (eu-west)",
     keyType: "server",
     maskedSecret: "hg_live_••••9f2a",
     lastUsedAt: "2026-04-29T08:00:00.000Z",

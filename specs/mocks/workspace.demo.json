@@ -5,7 +5,7 @@
   },
   "project": {
     "id": "prj_val_01",
-    "name": "Valorant Control Plane",
+    "name": "MOBA Control Plane",
     "environment": "sandbox"
   },
   "roles": [

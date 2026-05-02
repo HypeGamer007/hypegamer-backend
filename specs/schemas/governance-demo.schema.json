@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hypegamer.dev/schemas/governance-demo.schema.json",
+  "title": "Governance demo fixture",
+  "type": "object",
+  "required": ["version", "partners", "trustSignals", "settingsCopy", "auditActivity", "workspaceMembers", "roleSummaries"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string" },
+    "partners": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "orgName", "partnerType", "scopeSummary", "status", "lastReviewedAt"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "orgName": { "type": "string" },
+          "partnerType": { "type": "string" },
+          "scopeSummary": { "type": "string" },
+          "status": { "type": "string", "enum": ["active", "pending", "revoked"] },
+          "expiresAt": { "type": ["string", "null"] },
+          "lastReviewedAt": { "type": "string" }
+        }
+      }
+    },
+    "trustSignals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "severity", "state", "signalKind", "updatedAt", "evidencePreview"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "severity": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+          "state": { "type": "string", "enum": ["open", "triaged", "closed"] },
+          "signalKind": { "type": "string" },
+          "updatedAt": { "type": "string" },
+          "evidencePreview": { "type": "string" }
+        }
+      }
+    },
+    "settingsCopy": {
+      "type": "object",
+      "required": ["workspaceLabel", "retentionDaysDefault", "notificationsDefault"],
+      "additionalProperties": false,
+      "properties": {
+        "workspaceLabel": { "type": "string" },
+        "retentionDaysDefault": { "type": "integer", "minimum": 1 },
+        "notificationsDefault": { "type": "string" }
+      }
+    },
+    "auditActivity": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "occurredAt", "actorLabel", "verb", "objectLabel", "beforeSummary", "afterSummary"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "occurredAt": { "type": "string" },
+          "actorLabel": { "type": "string" },
+          "verb": { "type": "string" },
+          "objectLabel": { "type": "string" },
+          "beforeSummary": { "type": ["string", "null"] },
+          "afterSummary": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "workspaceMembers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "displayName", "roleKey", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "displayName": { "type": "string" },
+          "roleKey": { "type": "string" },
+          "status": { "type": "string", "enum": ["active", "invited"] }
+        }
+      }
+    },
+    "roleSummaries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "roleKey", "label", "capabilities"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "roleKey": { "type": "string" },
+          "label": { "type": "string" },
+          "capabilities": { "type": "string" }
+        }
+      }
+    }
+  }
+}

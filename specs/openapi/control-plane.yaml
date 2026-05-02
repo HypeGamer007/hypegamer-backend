@@ -57,6 +57,57 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SourceListResponse"
+  /v1/governance/partner-grants:
+    get:
+      summary: List partner access grants (Phase 4)
+      description: >-
+        Grant matrix for external orgs; UI mock today lives at `/partners`. Certified vs community paths must never
+        be conflated in responses.
+      responses:
+        "200":
+          description: Partner grant rows for the current project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartnerGrantListResponse"
+  /v1/governance/trust-signals:
+    get:
+      summary: List trust and integrity signals (Phase 4)
+      description: >-
+        Signal queue with policy-safe evidence; UI mock at `/trust`. Redacted previews remain the default for
+        restricted viewers.
+      responses:
+        "200":
+          description: Trust signal rows
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrustSignalListResponse"
+  /v1/governance/audit-events:
+    get:
+      summary: List recent control-plane audit events (Phase 4)
+      description: >-
+        Immutable-style audit feed; UI mock under Settings → Recent audit activity. Exports require elevated session
+        and redaction review in production.
+      responses:
+        "200":
+          description: Audit activity rows
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditEventListResponse"
+  /v1/governance/workspace-members:
+    get:
+      summary: List workspace members and role assignments (Phase 4)
+      description: >-
+        Directory roster backing Settings → Members. Invites and SCIM are out of band until directory services ship.
+      responses:
+        "200":
+          description: Member roster
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceMemberListResponse"
 components:
   schemas:
     Provenance:
@@ -138,3 +189,76 @@ components:
               id: { type: string }
               displayName: { type: string }
               status: { type: string, enum: [healthy, degraded, failed, paused] }
+    PartnerGrantListResponse:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/PartnerGrantRow"
+    PartnerGrantRow:
+      type: object
+      required: [id, orgName, partnerType, scopeSummary, status, lastReviewedAt]
+      properties:
+        id: { type: string }
+        orgName: { type: string }
+        partnerType: { type: string }
+        scopeSummary: { type: string }
+        status: { type: string, enum: [active, pending, revoked] }
+        expiresAt: { type: string, format: date-time, nullable: true }
+        lastReviewedAt: { type: string, format: date-time }
+    TrustSignalListResponse:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/TrustSignalRow"
+    TrustSignalRow:
+      type: object
+      required: [id, title, severity, state, signalKind, updatedAt, evidencePreview]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        severity: { type: string, enum: [low, medium, high, critical] }
+        state: { type: string, enum: [open, triaged, closed] }
+        signalKind: { type: string }
+        updatedAt: { type: string, format: date-time }
+        evidencePreview: { type: string }
+    AuditEventListResponse:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuditEventRow"
+    AuditEventRow:
+      type: object
+      required: [id, occurredAt, actorLabel, verb, objectLabel]
+      properties:
+        id: { type: string }
+        occurredAt: { type: string, format: date-time }
+        actorLabel: { type: string }
+        verb: { type: string }
+        objectLabel: { type: string }
+        beforeSummary: { type: string, nullable: true }
+        afterSummary: { type: string, nullable: true }
+    WorkspaceMemberListResponse:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkspaceMemberRow"
+    WorkspaceMemberRow:
+      type: object
+      required: [id, displayName, roleKey, status]
+      properties:
+        id: { type: string }
+        displayName: { type: string }
+        roleKey: { type: string }
+        status: { type: string, enum: [active, invited] }

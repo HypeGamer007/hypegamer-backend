@@ -7,15 +7,14 @@ export const DEMO_SOURCE_IMPACT: Record<
 > = {
   src_ok_01: {
     impactedProductCount: 3,
-    impactedProducts: ["Competitions", "Matches", "Broadcast widgets"],
+    impactedProducts: ["Tournament brackets", "Lane match feed", "Spectator widgets"],
   },
   src_deg_02: {
     impactedProductCount: 2,
-    impactedProducts: ["Competitions", "Matches"],
+    impactedProducts: ["Tournament brackets", "Lane match feed"],
   },
   src_fail_03: {
     impactedProductCount: 1,
-    impactedProducts: ["Competitions"],
+    impactedProducts: ["Tournament brackets"],
   },
 };
-

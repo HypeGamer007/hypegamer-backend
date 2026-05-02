@@ -11,7 +11,7 @@ test.describe("phase 1 source actions", () => {
     await page.goto("/sources");
     await expect(page.getByTestId("view-status")).toContainText("ready");
 
-    await page.getByRole("button", { name: /Pause source Official Event Feed/i }).click();
+    await page.getByRole("button", { name: /Pause source Spectator Match Feed/i }).click();
     await expect(page.getByTestId("pause-source-dialog")).toBeVisible();
 
     // Confirm pause and ensure we remain on list (button should stop row navigation).
@@ -19,7 +19,7 @@ test.describe("phase 1 source actions", () => {
     await expect(page).toHaveURL(/\/sources$/);
 
     // Row now shows paused status.
-    const row = page.getByRole("link", { name: /Open source Official Event Feed/i });
+    const row = page.getByRole("link", { name: /Open source Spectator Match Feed/i });
     await expect(row.getByRole("cell").nth(1)).toHaveText("paused");
   });
 });

@@ -1,18 +1,30 @@
 :root {
-  --color-bg: #0f1419;
-  --color-surface: #1a2332;
-  --color-surface-elevated: #243044;
-  --color-border: #2d3a4d;
+  --color-bg: #0a0e14;
+  --color-bg-radial: #121a26;
+  --color-surface: #151d2a;
+  --color-surface-header: #101722;
+  --color-surface-elevated: #1e2939;
+  --color-border: #2a3548;
+  --color-border-hud: color-mix(in srgb, var(--color-hud) 28%, var(--color-border));
   --color-text: #e8edf4;
   --color-text-muted: #8b9ab0;
-  --color-accent: #3d8bfd;
-  --color-accent-hover: #5ca0ff;
+  /* Electric sky — reads “dashboard,” pairs with mint HUD accents */
+  --color-accent: #38bdf8;
+  --color-accent-hover: #7dd3fc;
+  --color-hud: #2dd4bf;
   --color-success: #34c759;
   --color-warning: #ff9f0a;
   --radius-lg: 12px;
   --radius-md: 8px;
   --shadow-window: 0 12px 40px rgba(0, 0, 0, 0.35);
+  --shadow-hud-inset: inset 0 1px 0 color-mix(in srgb, #fff 8%, transparent);
+  /** Tables, cards, filter strips — matches shell HUD chrome (no layout change). */
+  --surface-panel-bg: linear-gradient(180deg, var(--color-surface-elevated) 0%, var(--color-surface) 100%);
+  --shadow-hud-panel:
+    var(--shadow-hud-inset),
+    0 0 0 1px color-mix(in srgb, var(--color-hud) 12%, transparent);
   --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-display: "Barlow Semi Condensed", "Segoe UI", system-ui, sans-serif;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -36,7 +48,12 @@ body,
 
 body {
   font-family: var(--font-sans);
-  background: var(--color-bg);
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(120% 80% at 10% -10%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 55%),
+    radial-gradient(90% 60% at 100% 0%, color-mix(in srgb, var(--color-hud) 10%, transparent), transparent 50%),
+    linear-gradient(180deg, var(--color-bg-radial) 0%, var(--color-bg) 55%);
+  background-attachment: fixed;
   color: var(--color-text);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;

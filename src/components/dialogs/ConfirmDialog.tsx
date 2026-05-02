@@ -1,4 +1,5 @@
-import { useEffect, useId, useRef } from "react";
+import { useId, useRef } from "react";
+import { useDialogFocusTrap } from "@/hooks/useDialogFocusTrap";
 import styles from "./ConfirmDialog.module.css";
 
 export function ConfirmDialog({
@@ -26,26 +27,15 @@ export function ConfirmDialog({
 }) {
   const titleId = useId();
   const bodyId = useId();
-  const cancelRef = useRef<HTMLButtonElement | null>(null);
+  const overlayRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (!open) return;
-    cancelRef.current?.focus();
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onCancel();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onCancel, open]);
+  useDialogFocusTrap(open, overlayRef, { onEscape: onCancel });
 
   if (!open) return null;
 
   return (
     <div
+      ref={overlayRef}
       className={styles.overlay}
       role="dialog"
       aria-modal="true"
@@ -65,7 +55,7 @@ export function ConfirmDialog({
         </p>
         {details ? <div className={styles.panel}>{details}</div> : null}
         <div className={styles.actions}>
-          <button ref={cancelRef} type="button" className={styles.btn} onClick={onCancel}>
+          <button type="button" className={styles.btn} onClick={onCancel}>
             {cancelLabel}
           </button>
           <button

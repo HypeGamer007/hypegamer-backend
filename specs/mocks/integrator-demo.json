@@ -1,0 +1,131 @@
+{
+  "version": "1.0.0",
+  "demoDisclaimer": "Illustrative numbers and plugin readiness are mock-only. Production ROI and eligibility require certified pipelines and signed partner agreements.",
+  "pipelineEvents": [
+    {
+      "id": "pe_001",
+      "at": "2026-04-30T08:01:12.000Z",
+      "level": "info",
+      "channel": "sdk.ingest",
+      "message": "Batch accepted: 1,240 lane + pick/ban rows (MOBA sandbox normalization)",
+      "requestId": "req_8f2a91"
+    },
+    {
+      "id": "pe_002",
+      "at": "2026-04-30T08:01:14.000Z",
+      "level": "info",
+      "channel": "mapper.canonical",
+      "message": "Mapped 98% of required fields; 2 ward/smoke consent fields flagged for policy review",
+      "requestId": "req_8f2a92"
+    },
+    {
+      "id": "pe_003",
+      "at": "2026-04-30T08:02:01.000Z",
+      "level": "warn",
+      "channel": "consent.player_media",
+      "message": "Partial: player portrait consent missing for 14 pros — widgets stay amber until resolved",
+      "requestId": "req_8f2aa1"
+    },
+    {
+      "id": "pe_004",
+      "at": "2026-04-30T08:03:44.000Z",
+      "level": "error",
+      "channel": "export.third_party",
+      "message": "Partner queue paused: shard API credential not rotated (demo block)",
+      "requestId": "req_8f2bb0"
+    }
+  ],
+  "mappingRequirements": [
+    {
+      "id": "mr_comp_id",
+      "label": "Stable tournament identifier",
+      "category": "Identity",
+      "status": "present",
+      "provenanceNote": "Certified feed + cross-check with publisher roster"
+    },
+    {
+      "id": "mr_match_schedule",
+      "label": "Match schedule + timezone",
+      "category": "Scheduling",
+      "status": "present",
+      "provenanceNote": "Community-sourced; not conflated with certified brackets in UI"
+    },
+    {
+      "id": "mr_player_consent_media",
+      "label": "Player portrait consent (stream)",
+      "category": "Policy",
+      "status": "partial",
+      "provenanceNote": "14 players pending; restricted fields redacted in previews"
+    },
+    {
+      "id": "mr_odds_live",
+      "label": "Live GPM / net-worth stream (signed)",
+      "category": "Integrity",
+      "status": "missing",
+      "provenanceNote": "Required for green on integrity-weighted widgets"
+    }
+  ],
+  "readinessSummary": {
+    "green": 5,
+    "amber": 3,
+    "red": 1,
+    "headline": "You can ship sandbox widgets today. Live monetization plugins need consent + GPM stream fixes."
+  },
+  "plugins": [
+    {
+      "id": "pl_embed_basic",
+      "name": "Scoreboard embed (sandbox)",
+      "kind": "widget",
+      "partnerName": null,
+      "readiness": "green",
+      "missingForGreen": [],
+      "upliftLowUsd": 800,
+      "upliftHighUsd": 3200
+    },
+    {
+      "id": "pl_leaderboard_pro",
+      "name": "Live leaderboard + GPM ribbon",
+      "kind": "widget",
+      "partnerName": null,
+      "readiness": "amber",
+      "missingForGreen": ["Player portrait consent (14)", "Signed live GPM stream"],
+      "upliftLowUsd": 2200,
+      "upliftHighUsd": 9000
+    },
+    {
+      "id": "pl_export_csv",
+      "name": "Weekly broadcaster export",
+      "kind": "export",
+      "partnerName": null,
+      "readiness": "green",
+      "missingForGreen": [],
+      "upliftLowUsd": 400,
+      "upliftHighUsd": 1500
+    },
+    {
+      "id": "pl_tourn_alpha",
+      "name": "AlphaSeries bracket sync",
+      "kind": "tournament_tool",
+      "partnerName": "AlphaSeries",
+      "readiness": "red",
+      "missingForGreen": ["Rotated API credential", "Certified bracket source"],
+      "upliftLowUsd": 0,
+      "upliftHighUsd": 0
+    },
+    {
+      "id": "pl_broadcast_neo",
+      "name": "NeoCast lower-third pack",
+      "kind": "broadcast_partner",
+      "partnerName": "NeoCast",
+      "readiness": "amber",
+      "missingForGreen": ["Portrait pack OR generic silhouettes policy"],
+      "upliftLowUsd": 1500,
+      "upliftHighUsd": 6000
+    }
+  ],
+  "roiNarrative": {
+    "title": "Estimated partner uplift (demo)",
+    "body": "Ranges sum illustrative enabled plugins only (green + optional amber where you accept policy overlays). Third-party tools with red readiness are excluded until blockers clear.",
+    "methodology": "Mock formula: base audience × engagement factor × CPM bands supplied by partner marketing templates — not financial advice."
+  }
+}

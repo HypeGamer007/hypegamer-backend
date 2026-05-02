@@ -15,7 +15,7 @@ test("entities directory loads with demo seeded", async ({ page }) => {
   await page.goto("/entities");
   await expect(page.getByTestId("view-status")).toContainText("ready");
   await expect(page.getByTestId("entities-page")).toBeVisible();
-  await page.getByRole("link", { name: /Open entity Rocket City Crew/i }).click();
+  await page.getByRole("link", { name: /Open entity Radiant Lane Crew/i }).click();
   await expect(page).toHaveURL(/\/entities\/team_100$/);
   await expect(page.getByTestId("entity-detail-page")).toBeVisible();
 });

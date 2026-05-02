@@ -1,21 +1,35 @@
+/** Keep in sync with `docs/analytics/events.yaml` (verified by `npm run verify:telemetry`). */
 export type TelemetryEventName =
   | "workspace_opened"
   | "permission_denied_viewed"
-  | "setup_cta_clicked"
   | "sandbox_seeded"
+  | "setup_cta_clicked"
+  | "empty_state_cta_clicked"
   | "home_viewed"
   | "competition_viewed"
   | "match_viewed"
   | "source_viewed"
+  | "filter_applied"
   | "source_paused"
   | "identity_link_completed"
   | "consent_revoked"
   | "merge_applied"
-  | "empty_state_cta_clicked"
-  | "filter_applied"
   | "data_product_created"
   | "widget_published"
-  | "api_key_created";
+  | "widget_unpublished"
+  | "api_key_created"
+  | "integrator_hub_viewed"
+  | "partner_access_granted"
+  | "partners_directory_viewed"
+  | "partners_access_revoked"
+  | "trust_queue_viewed"
+  | "trust_signal_reviewed"
+  | "role_changed"
+  | "settings_workspace_viewed"
+  | "settings_retention_saved"
+  | "search_run"
+  | "notification_opened"
+  | "flag_enabled";
 
 export type TelemetryPayload = Record<string, unknown>;
 

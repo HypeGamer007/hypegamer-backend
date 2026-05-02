@@ -4,11 +4,15 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "start": "vite",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
+    "verify:telemetry": "node scripts/verify-telemetry-contract.mjs",
+    "verify:contracts": "node scripts/verify-contracts.mjs",
+    "verify": "npm run build && npm run test && npm run verify:telemetry && npm run verify:contracts",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui"
   },

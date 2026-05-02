@@ -1,0 +1,234 @@
+{
+  "version": "1.0.0",
+  "partners": [
+    {
+      "id": "prt_northwind",
+      "orgName": "Radiant Forge",
+      "partnerType": "Broadcaster",
+      "scopeSummary": "Read tournaments, lane feeds, widgets (sandbox + live preview)",
+      "status": "active",
+      "expiresAt": "2026-10-01T00:00:00.000Z",
+      "lastReviewedAt": "2026-04-20T16:00:00.000Z"
+    },
+    {
+      "id": "prt_contoso",
+      "orgName": "Dire Circuit Events",
+      "partnerType": "Tournament organizer",
+      "scopeSummary": "Write brackets (certified sources only), read match results",
+      "status": "pending",
+      "expiresAt": null,
+      "lastReviewedAt": "2026-04-28T09:30:00.000Z"
+    },
+    {
+      "id": "prt_fabrikam",
+      "orgName": "Warding Analytics",
+      "partnerType": "Data processor",
+      "scopeSummary": "Read anonymized aggregates; no player PII",
+      "status": "revoked",
+      "expiresAt": "2026-03-15T00:00:00.000Z",
+      "lastReviewedAt": "2026-03-10T12:00:00.000Z"
+    }
+  ],
+  "trustSignals": [
+    {
+      "id": "sig_odds_spike",
+      "title": "Net worth swing — Ancient Major Game 3",
+      "severity": "high",
+      "state": "open",
+      "signalKind": "integrity",
+      "updatedAt": "2026-04-30T10:15:00.000Z",
+      "evidencePreview": "Window: 90s · [REDACTED: raw book feed] · confidence band: high"
+    },
+    {
+      "id": "sig_lineup_leak",
+      "title": "Unpublished pick order surfaced in chat scrape",
+      "severity": "medium",
+      "state": "triaged",
+      "signalKind": "publisher",
+      "updatedAt": "2026-04-29T18:40:00.000Z",
+      "evidencePreview": "Source: community · no certified roster match · [REDACTED: editor IP]"
+    },
+    {
+      "id": "sig_delay",
+      "title": "Observer delay under policy threshold",
+      "severity": "low",
+      "state": "closed",
+      "signalKind": "operational",
+      "updatedAt": "2026-04-22T08:00:00.000Z",
+      "evidencePreview": "Measured skew 4.2s · within 10s policy · no action"
+    }
+  ],
+  "settingsCopy": {
+    "workspaceLabel": "Demo workspace",
+    "retentionDaysDefault": 400,
+    "notificationsDefault": "Security + billing only (demo)"
+  },
+  "auditActivity": [
+    {
+      "id": "aud_001",
+      "occurredAt": "2026-04-30T14:02:00.000Z",
+      "actorLabel": "org_admin@demo",
+      "verb": "partner_access_revoked",
+      "objectLabel": "Partner grant · Warding Analytics",
+      "beforeSummary": "status=active · scopes=read aggregates",
+      "afterSummary": "status=revoked · keys scheduled for expiry"
+    },
+    {
+      "id": "aud_002",
+      "occurredAt": "2026-04-30T11:40:00.000Z",
+      "actorLabel": "integrity_reviewer@demo",
+      "verb": "trust_signal_reviewed",
+      "objectLabel": "Signal · Unpublished pick order surfaced",
+      "beforeSummary": "state=open",
+      "afterSummary": "state=triaged · notes sealed in audit sink (mock)"
+    },
+    {
+      "id": "aud_003",
+      "occurredAt": "2026-04-29T22:18:00.000Z",
+      "actorLabel": "project_admin@demo",
+      "verb": "retention_policy_updated",
+      "objectLabel": "Workspace · audit retention days",
+      "beforeSummary": "365 days",
+      "afterSummary": "400 days (demo)"
+    },
+    {
+      "id": "aud_004",
+      "occurredAt": "2026-04-29T09:05:00.000Z",
+      "actorLabel": "publisher_reviewer@demo",
+      "verb": "source_paused",
+      "objectLabel": "Source · Community wiki ingest",
+      "beforeSummary": "status=active",
+      "afterSummary": "status=paused · downstream widgets flagged partial"
+    },
+    {
+      "id": "aud_005",
+      "occurredAt": "2026-04-28T16:30:00.000Z",
+      "actorLabel": "org_admin@demo",
+      "verb": "api_key_rotated",
+      "objectLabel": "API key · Widget embed (sandbox)",
+      "beforeSummary": "kid=wk_sandbox_01",
+      "afterSummary": "kid=wk_sandbox_02 · old key grace 24h (mock)"
+    },
+    {
+      "id": "aud_006",
+      "occurredAt": "2026-04-28T09:31:00.000Z",
+      "actorLabel": "system",
+      "verb": "partner_grant_submitted",
+      "objectLabel": "Partner grant · Dire Circuit Events",
+      "beforeSummary": null,
+      "afterSummary": "status=pending · awaiting org_admin approval"
+    },
+    {
+      "id": "aud_007",
+      "occurredAt": "2026-04-27T19:12:00.000Z",
+      "actorLabel": "developer@demo",
+      "verb": "webhook_delivery_retry",
+      "objectLabel": "Webhook · standings.updated",
+      "beforeSummary": "attempt=2 · HTTP 504",
+      "afterSummary": "attempt=3 · delivered 200 (mock)"
+    },
+    {
+      "id": "aud_008",
+      "occurredAt": "2026-04-27T08:00:00.000Z",
+      "actorLabel": "integrity_reviewer@demo",
+      "verb": "trust_signal_reviewed",
+      "objectLabel": "Signal · Observer delay under policy threshold",
+      "beforeSummary": "state=triaged",
+      "afterSummary": "state=closed · no breach"
+    },
+    {
+      "id": "aud_009",
+      "occurredAt": "2026-04-26T13:44:00.000Z",
+      "actorLabel": "org_admin@demo",
+      "verb": "role_changed",
+      "objectLabel": "Member · external_analyst_4",
+      "beforeSummary": "role=viewer",
+      "afterSummary": "role=publisher_reviewer"
+    },
+    {
+      "id": "aud_010",
+      "occurredAt": "2026-04-25T21:09:00.000Z",
+      "actorLabel": "project_admin@demo",
+      "verb": "widget_published",
+      "objectLabel": "Widget · Live scoreboard",
+      "beforeSummary": "env=sandbox",
+      "afterSummary": "env=live · policy gate passed (mock)"
+    },
+    {
+      "id": "aud_011",
+      "occurredAt": "2026-04-24T10:55:00.000Z",
+      "actorLabel": "system",
+      "verb": "data_product_created",
+      "objectLabel": "Data product · Certified brackets feed",
+      "beforeSummary": null,
+      "afterSummary": "draft created · provenance=certified-only"
+    },
+    {
+      "id": "aud_012",
+      "occurredAt": "2026-04-23T17:20:00.000Z",
+      "actorLabel": "org_admin@demo",
+      "verb": "partner_access_granted",
+      "objectLabel": "Partner grant · Radiant Forge",
+      "beforeSummary": "status=pending",
+      "afterSummary": "status=active · scopes applied"
+    }
+  ],
+  "workspaceMembers": [
+    {
+      "id": "mbr_alex",
+      "displayName": "Alex Chen",
+      "roleKey": "org_admin",
+      "status": "active"
+    },
+    {
+      "id": "mbr_jordan",
+      "displayName": "Jordan Lee",
+      "roleKey": "project_admin",
+      "status": "active"
+    },
+    {
+      "id": "mbr_rin",
+      "displayName": "Rin Okada",
+      "roleKey": "integrity_reviewer",
+      "status": "active"
+    },
+    {
+      "id": "mbr_sam",
+      "displayName": "Sam Rivera",
+      "roleKey": "viewer",
+      "status": "invited"
+    }
+  ],
+  "roleSummaries": [
+    {
+      "id": "role_org_admin",
+      "roleKey": "org_admin",
+      "label": "Organization admin",
+      "capabilities": "Partner grants, trust queue, workspace settings, billing hooks (live)."
+    },
+    {
+      "id": "role_project_admin",
+      "roleKey": "project_admin",
+      "label": "Project admin",
+      "capabilities": "Products, widgets, developers tools; governance read; retention save in demo when canAdmin maps here."
+    },
+    {
+      "id": "role_publisher_reviewer",
+      "roleKey": "publisher_reviewer",
+      "label": "Publisher reviewer",
+      "capabilities": "Partner grant actions where policy allows; no org-wide admin by default."
+    },
+    {
+      "id": "role_integrity_reviewer",
+      "roleKey": "integrity_reviewer",
+      "label": "Integrity reviewer",
+      "capabilities": "Trust signal disposition; partner directory may be read-only per route manifest."
+    },
+    {
+      "id": "role_viewer",
+      "roleKey": "viewer",
+      "label": "Viewer",
+      "capabilities": "Read-only lists and settings policy view; no grant or retention mutations."
+    }
+  ]
+}

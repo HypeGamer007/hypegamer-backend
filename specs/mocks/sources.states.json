@@ -3,7 +3,7 @@
     "items": [
       {
         "id": "src_ok_01",
-        "displayName": "Official Event Feed",
+        "displayName": "Spectator Match Feed",
         "status": "healthy",
         "lastUpdatedAt": "2026-05-10T10:00:00Z",
         "provenanceTier": "publisher_authorized"

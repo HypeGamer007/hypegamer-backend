@@ -1,26 +1,26 @@
 import { useEffect, useRef } from "react";
-import { NavLink, Outlet, useSearchParams } from "react-router-dom";
+import { Outlet, useLocation, useSearchParams } from "react-router-dom";
+import { AppShellNav } from "@/components/app-shell/AppShellNav";
 import { SetupChecklist } from "@/components/setup/SetupChecklist";
+import { emitSetupChanged } from "@/lib/setupEvents";
 import { track } from "@/lib/telemetry";
-import { STORAGE_ENVIRONMENT } from "@/lib/storageKeys";
+import { STORAGE_ENVIRONMENT, STORAGE_GOVERNANCE_MODULES_VISITED } from "@/lib/storageKeys";
 import styles from "./AppShell.module.css";
 
-const nav = [
-  { to: "/home", label: "Home" },
-  { to: "/competitions", label: "Competitions" },
-  { to: "/matches", label: "Matches" },
-  { to: "/sources", label: "Sources" },
-  { to: "/entities", label: "Entities" },
-  { to: "/identity", label: "Identity" },
-  { to: "/data-products", label: "Data products" },
-  { to: "/widgets", label: "Widgets" },
-  { to: "/developers", label: "Developers" },
-  { to: "/onboarding", label: "Setup" },
-];
-
 export function AppShell() {
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const openedRef = useRef(false);
+
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === "/partners" || path === "/trust" || path === "/settings") {
+      if (localStorage.getItem(STORAGE_GOVERNANCE_MODULES_VISITED) !== "1") {
+        localStorage.setItem(STORAGE_GOVERNANCE_MODULES_VISITED, "1");
+        emitSetupChanged();
+      }
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     if (openedRef.current) return;
@@ -37,20 +37,11 @@ export function AppShell() {
   return (
     <div className={styles.root} data-testid="app-shell">
       <header className={styles.header}>
-        <div className={styles.brand}>Hypegamer</div>
-        <nav className={styles.nav} aria-label="Primary">
-          {nav.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className={({ isActive }) =>
-                `${styles.link} ${isActive ? styles.linkActive : ""}`
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
+        <div className={styles.brandBlock}>
+          <div className={styles.brand}>Hypegamer</div>
+          <div className={styles.brandTag}>control plane</div>
+        </div>
+        <AppShellNav />
       </header>
       <div className={styles.shellBody}>
         <aside className={styles.checklistCol}>

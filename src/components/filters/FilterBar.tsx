@@ -18,7 +18,8 @@ export interface FilterSearch {
 
 export interface FilterBarProps {
   analyticsId: string;
-  selects: FilterSelect[];
+  /** Omit or pass `[]` when the bar is search-only (e.g. workspace search). */
+  selects?: FilterSelect[];
   search?: FilterSearch;
   disabled?: boolean;
   /** When false, the bar still reflects URL state but hides the Clear control (e.g. when a dedicated empty state has its own clear CTA). */
@@ -29,7 +30,7 @@ export interface FilterBarProps {
 
 export function FilterBar({
   analyticsId,
-  selects,
+  selects = [],
   search,
   disabled = false,
   showClearButton = true,

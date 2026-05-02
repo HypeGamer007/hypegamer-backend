@@ -82,6 +82,7 @@ export const ONBOARDING_STEPS: OnboardingStepDefinition[] = [
     title: "You are ready",
     body:
       "Open the command center to track source health, competitions, and next steps. " +
+      "When sandbox data is on, use Partners, Trust, and Settings from the nav for grant matrix, integrity signals, and audit policy (mock until APIs ship). " +
       "You can return to this checklist anytime from the shell if setup is incomplete.",
   },
 ];

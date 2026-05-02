@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { PageFrame } from "@/components/layout/PageFrame";
 import { RouteViewRoot } from "@/components/state/RouteViewRoot";
 import { EnvironmentBadge } from "@/components/entity/EnvironmentBadge";
@@ -201,6 +202,13 @@ export function IdentityPage() {
             ) : (
               <p className={styles.muted}>No auditable identity events in this browser session yet.</p>
             )}
+            <p className={styles.muted} style={{ marginTop: 12 }}>
+              Workspace-wide control-plane audit (fixture-backed) lives under{" "}
+              <Link to="/settings" data-testid="identity-link-workspace-settings">
+                Settings → Recent audit activity
+              </Link>
+              .
+            </p>
           </section>
         </div>
 

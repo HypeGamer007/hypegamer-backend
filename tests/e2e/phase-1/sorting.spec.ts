@@ -9,7 +9,7 @@ test.describe("phase 1 sorting", () => {
     await page.goto("/competitions?sort=name_desc");
     await expect(page.getByTestId("view-status")).toContainText("ready");
     const firstDataRow = page.locator("tbody tr").first();
-    await expect(firstDataRow.locator("td").first()).toHaveText("Spring Invitational");
+    await expect(firstDataRow.locator("td").first()).toHaveText("Rosh Pit Open");
   });
 
   test("sources health sort puts healthy before failed", async ({ page }) => {

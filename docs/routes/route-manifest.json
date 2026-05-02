@@ -126,7 +126,56 @@
       "owner": "frontend",
       "featureFlag": "cp.developers.enabled",
       "allowedRoles": ["org_admin", "project_admin", "developer"],
-      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"],
+      "searchParams": [
+        {
+          "name": "tab",
+          "description": "Primary sub-view: API keys, webhook integrations, or delivery logs. Omitted on first load is normalized to integrations.",
+          "values": ["keys", "integrations", "logs"]
+        },
+        {
+          "name": "q",
+          "description": "Keys tab: case-insensitive substring match on key label, type, or masked secret preview."
+        },
+        {
+          "name": "keyType",
+          "description": "Keys tab: filter by key type (e.g. server, readonly)."
+        },
+        {
+          "name": "deliveryStatus",
+          "description": "Logs tab: filter deliveries by status (failed, delivered, retrying).",
+          "values": ["failed", "delivered", "retrying"]
+        },
+        {
+          "name": "deliveryEvent",
+          "description": "Logs tab: filter by webhook event name (matches mock catalog values such as data_product_created)."
+        },
+        {
+          "name": "deliveryEndpoint",
+          "description": "Logs tab: filter by persisted webhook endpoint id (opaque id from local demo store)."
+        }
+      ]
+    },
+    {
+      "id": "integrator_hub",
+      "path": "/integrator",
+      "phase": 3,
+      "owner": "frontend",
+      "featureFlag": "cp.integrator_hub.enabled",
+      "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer", "developer", "broadcaster"],
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"],
+      "searchParams": [
+        {
+          "name": "tab",
+          "description": "Journey section: connect, pipeline, mapping, readiness, plugins, roi. Omitted on first load normalizes to connect.",
+          "values": ["connect", "pipeline", "mapping", "readiness", "plugins", "roi"]
+        },
+        {
+          "name": "logLevel",
+          "description": "Pipeline tab: filter ingestion log rows by severity (info, warn, error).",
+          "values": ["info", "warn", "error"]
+        }
+      ]
     },
     {
       "id": "partners",
@@ -135,7 +184,15 @@
       "owner": "frontend",
       "featureFlag": "cp.partners.enabled",
       "allowedRoles": ["org_admin", "project_admin", "publisher_reviewer"],
-      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"],
+      "searchParams": [
+        { "name": "q", "description": "Substring match on organization, partner type, scope summary, or status." },
+        {
+          "name": "status",
+          "description": "Filter partner grant status.",
+          "values": ["active", "pending", "revoked"]
+        }
+      ]
     },
     {
       "id": "trust",
@@ -144,7 +201,20 @@
       "owner": "frontend",
       "featureFlag": "cp.trust.enabled",
       "allowedRoles": ["org_admin", "integrity_reviewer"],
-      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"],
+      "searchParams": [
+        { "name": "q", "description": "Substring match on signal title, severity, state, or kind." },
+        {
+          "name": "severity",
+          "description": "Filter by signal severity.",
+          "values": ["low", "medium", "high", "critical"]
+        },
+        {
+          "name": "state",
+          "description": "Filter by workflow state.",
+          "values": ["open", "triaged", "closed"]
+        }
+      ]
     },
     {
       "id": "audit_settings",
@@ -153,7 +223,8 @@
       "owner": "frontend",
       "featureFlag": "cp.settings.enabled",
       "allowedRoles": ["org_admin", "project_admin", "viewer"],
-      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"],
+      "searchParams": []
     },
     {
       "id": "search_notifications",
@@ -162,7 +233,13 @@
       "owner": "frontend",
       "featureFlag": "cp.search.enabled",
       "allowedRoles": ["org_admin", "project_admin", "developer", "publisher_reviewer", "integrity_reviewer", "broadcaster", "viewer"],
-      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"]
+      "supportsStates": ["loading", "ready", "empty", "partial", "error", "restricted", "denied"],
+      "searchParams": [
+        {
+          "name": "q",
+          "description": "Workspace-wide mock search query (fixture-backed; URL-synced)."
+        }
+      ]
     }
   ]
 }

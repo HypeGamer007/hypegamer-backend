@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "hintQueries": ["ancient", "lane", "radiant", "rosh", "trust"],
+  "results": [
+    {
+      "id": "sr_comp",
+      "title": "Ancient Major",
+      "subtitle": "Tournament · certified shard feed",
+      "route": "/competitions",
+      "matchTerms": ["ancient", "major", "tournament", "moba"]
+    },
+    {
+      "id": "sr_match",
+      "title": "Lane GPM snapshot (draft product)",
+      "subtitle": "Data product · community tier",
+      "route": "/data-products",
+      "matchTerms": ["lane", "gpm", "snapshot", "draft"]
+    },
+    {
+      "id": "sr_partner",
+      "title": "Partner grants",
+      "subtitle": "Governance · directory",
+      "route": "/partners",
+      "matchTerms": ["partner", "grant", "radiant"]
+    },
+    {
+      "id": "sr_trust",
+      "title": "Trust queue",
+      "subtitle": "Integrity signals",
+      "route": "/trust",
+      "matchTerms": ["trust", "integrity", "signal"]
+    },
+    {
+      "id": "sr_widget",
+      "title": "Widgets & embeds",
+      "subtitle": "Productization",
+      "route": "/widgets",
+      "matchTerms": ["widget", "embed", "scoreboard"]
+    }
+  ]
+}

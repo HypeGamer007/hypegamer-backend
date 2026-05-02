@@ -7,7 +7,7 @@ test("competitions shows demo rows when sandbox seeded", async ({ page }) => {
   });
   await page.goto("/competitions");
   await expect(page.getByTestId("view-status")).toContainText("ready");
-  await expect(page.getByText("Spring Invitational")).toBeVisible();
+  await expect(page.getByText("Ancient Major")).toBeVisible();
 });
 
 test("competitions shows empty state without demo data", async ({ page }) => {

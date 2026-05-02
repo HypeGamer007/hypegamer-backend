@@ -1,7 +1,8 @@
 .root {
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-hud);
   border-radius: var(--radius-lg);
-  background: var(--color-surface);
+  background: var(--surface-panel-bg);
+  box-shadow: var(--shadow-hud-panel);
   padding: var(--space-4);
 }
 
@@ -12,6 +13,44 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--color-text-muted);
+}
+
+.tourBlock {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, var(--color-hud) 28%, var(--color-border));
+  background: color-mix(in srgb, var(--color-hud) 6%, var(--color-surface-elevated));
+}
+
+.tourLead {
+  margin: 0 0 var(--space-3);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+.tourBtn {
+  width: 100%;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-hud);
+  background: color-mix(in srgb, var(--color-accent) 18%, var(--color-surface-elevated));
+  color: var(--color-text);
+  cursor: pointer;
+  box-shadow: var(--shadow-hud-inset);
+}
+
+.tourBtn:hover {
+  border-color: color-mix(in srgb, var(--color-hud) 40%, var(--color-border));
+}
+
+.tourBtn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .list {

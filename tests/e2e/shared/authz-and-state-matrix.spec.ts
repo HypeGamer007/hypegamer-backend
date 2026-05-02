@@ -14,6 +14,11 @@ const routes = [
   "/data-products",
   "/widgets",
   "/developers",
+  "/integrator",
+  "/partners",
+  "/trust",
+  "/settings",
+  "/search",
 ];
 
 for (const route of routes) {

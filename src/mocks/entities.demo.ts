@@ -37,31 +37,31 @@ export const DEMO_ENTITIES: EntityProfile[] = [
   {
     id: "team_100",
     type: "team",
-    displayName: "Rocket City Crew",
+    displayName: "Radiant Lane Crew",
     status: "active",
-    primaryGame: "Rocket League",
+    primaryGame: "MOBA",
     lastUpdatedAt: "2026-05-10T09:00:00Z",
     provenance: "Publisher authorized",
-    aliases: ["RCC", "Rocket City"],
+    aliases: ["RLC", "RadiantLane"],
     notes: "Roster is demo data; identity graph ships later.",
     roster: [
-      { id: "player_200", displayName: "Astra", role: "Captain" },
+      { id: "player_200", displayName: "Sable", role: "Captain" },
       { id: "player_201", displayName: "Kestrel" },
     ],
     linkedAccounts: [
-      { provider: "twitch", handle: "rocketcitycrew", status: "linked" },
-      { provider: "steam", handle: "rcc_official", status: "pending" },
+      { provider: "twitch", handle: "radiantlanecrew", status: "linked" },
+      { provider: "steam", handle: "rlc_official", status: "pending" },
     ],
   },
   {
     id: "player_200",
     type: "player",
-    displayName: "Astra",
+    displayName: "Sable",
     status: "active",
-    primaryGame: "Rocket League",
+    primaryGame: "MOBA",
     lastUpdatedAt: "2026-05-10T07:40:00Z",
     provenance: "Community",
-    aliases: ["AstraRL", "Astra_7"],
+    aliases: ["SableMOBA", "Sable_7"],
     linkedAccounts: [{ provider: "steam", handle: "astra-7", status: "linked" }],
     skillCoverage: { band: "high", rankedMatchSamples: 48 },
   },
@@ -70,10 +70,10 @@ export const DEMO_ENTITIES: EntityProfile[] = [
     type: "player",
     displayName: "Kestrel",
     status: "flagged",
-    primaryGame: "Rocket League",
+    primaryGame: "MOBA",
     lastUpdatedAt: "2026-05-09T18:20:00Z",
     provenance: "Publisher authorized",
-    aliases: ["Kes", "Kestrel_RL", "k3str3l"],
+    aliases: ["Kes", "Kestrel_MOBA", "k3str3l"],
     notes: "Flagged because multiple aliases map to overlapping identities.",
     linkedAccounts: [
       { provider: "steam", handle: "kestrel", status: "error" },
@@ -82,7 +82,7 @@ export const DEMO_ENTITIES: EntityProfile[] = [
     skillCoverage: { band: "medium", rankedMatchSamples: 14 },
     mergeSuggestion: {
       intoEntityId: "player_200",
-      intoDisplayName: "Astra",
+      intoDisplayName: "Sable",
       confidenceBand: "medium",
       rationale:
         "Shared recovery signals on Steam plus overlapping alias timing suggest a single underlying roster identity.",
@@ -91,12 +91,12 @@ export const DEMO_ENTITIES: EntityProfile[] = [
   {
     id: "team_101",
     type: "team",
-    displayName: "Valorant Vanguards",
+    displayName: "Dire Vanguard Academy",
     status: "inactive",
-    primaryGame: "Valorant",
+    primaryGame: "MOBA",
     lastUpdatedAt: "2026-05-01T12:00:00Z",
     provenance: "Community",
-    aliases: ["VGV", "Vanguards"],
+    aliases: ["DVA", "Vanguard"],
     roster: [{ id: "player_202", displayName: "Nova" }],
     linkedAccounts: [],
   },
@@ -105,7 +105,7 @@ export const DEMO_ENTITIES: EntityProfile[] = [
     type: "player",
     displayName: "Nova",
     status: "active",
-    primaryGame: "Valorant",
+    primaryGame: "MOBA",
     lastUpdatedAt: "2026-05-02T16:30:00Z",
     provenance: "Community",
     /** Duplicate literal appears twice — UI should surface duplicate-source cues without changing the canonical name. */
@@ -122,4 +122,3 @@ export const DEMO_ENTITY_SUMMARIES: EntitySummaryRow[] = DEMO_ENTITIES.map(
 export function getEntityById(id: string) {
   return DEMO_ENTITIES.find((e) => e.id === id);
 }
-

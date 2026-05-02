@@ -29,10 +29,10 @@ describe("detailListOrigin", () => {
   });
 
   it("reads listSearch from state and builds location search", () => {
-    const state = { listSearch: "game=Valorant" };
+    const state = { listSearch: "game=MOBA" };
     expect(isDetailListOriginState(state)).toBe(true);
-    expect(listSearchFromState(state)).toBe("game=Valorant");
-    expect(resolveDetailListLocationSearch("competitions", state)).toBe("?game=Valorant");
+    expect(listSearchFromState(state)).toBe("game=MOBA");
+    expect(resolveDetailListLocationSearch("competitions", state)).toBe("?game=MOBA");
   });
 
   it("does not double the question mark in state", () => {
@@ -40,16 +40,16 @@ describe("detailListOrigin", () => {
   });
 
   it("state wins over sessionStorage", () => {
-    sessionStorage.setItem(SESSION_LIST_ORIGIN_COMPETITIONS, "game=Rocket+League");
-    expect(resolveDetailListSearchRaw("competitions", { listSearch: "game=Valorant" })).toBe(
-      "game=Valorant",
+    sessionStorage.setItem(SESSION_LIST_ORIGIN_COMPETITIONS, "game=Shard+Duel");
+    expect(resolveDetailListSearchRaw("competitions", { listSearch: "game=MOBA" })).toBe(
+      "game=MOBA",
     );
   });
 
   it("falls back to sessionStorage when state is empty", () => {
-    persistDetailListSearch("matches", "competition=Spring+Invitational");
-    expect(resolveDetailListSearchRaw("matches", {})).toBe("competition=Spring+Invitational");
-    expect(resolveDetailListLocationSearch("matches", {})).toBe("?competition=Spring+Invitational");
+    persistDetailListSearch("matches", "competition=Ancient+Major");
+    expect(resolveDetailListSearchRaw("matches", {})).toBe("competition=Ancient+Major");
+    expect(resolveDetailListLocationSearch("matches", {})).toBe("?competition=Ancient+Major");
   });
 
   it("persist removes key when query is empty", () => {

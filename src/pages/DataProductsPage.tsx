@@ -1,4 +1,5 @@
 import { useId, useMemo, useState } from "react";
+import { dataProductsWithPolicyConflict } from "@/lib/dataProductPolicy";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import dlg from "@/components/dialogs/ConfirmDialog.module.css";
 import { EmptyState } from "@/components/empty-state/EmptyState";
@@ -69,6 +70,8 @@ export function DataProductsPage() {
     return [...DEMO_DATA_PRODUCTS, ...readExtraDataProducts()];
   }, [storageTick]);
 
+  const policyConflicts = useMemo(() => dataProductsWithPolicyConflict(catalog), [catalog]);
+
   const rows = useMemo(() => {
     const base = catalog;
     const filtered = base.filter((r) => {
@@ -131,6 +134,7 @@ export function DataProductsPage() {
       status: "draft",
       fieldCount: 0,
       updatedAt: new Date().toISOString(),
+      ingestionTier: draftEntityType === "player" || draftEntityType === "match" ? "community" : "certified",
     };
     const next = [...readExtraDataProducts(), row];
     writeExtraDataProducts(next);
@@ -182,6 +186,99 @@ export function DataProductsPage() {
           </button>
         }
       >
+        {demoSeeded && (status === "ready" || status === "partial") && !filtersDisabled ? (
+          <>
+            {policyConflicts.length ? (
+              <div
+                role="alert"
+                data-testid="data-products-policy-conflicts"
+                style={{
+                  marginBottom: 16,
+                  padding: "12px 14px",
+                  borderRadius: "var(--radius-md)",
+                  border: "1px solid color-mix(in srgb, var(--color-text) 25%, var(--color-border))",
+                  background: "color-mix(in srgb, var(--color-text) 6%, var(--color-surface))",
+                }}
+              >
+                <strong style={{ display: "block", marginBottom: 8 }}>Policy conflict — community drafts</strong>
+                <p style={{ margin: "0 0 8px", fontSize: "0.875rem", color: "var(--color-text-muted)", lineHeight: 1.45 }}>
+                  These drafts ingest <strong>community</strong> tier sources. Publishing to live widgets or certified-only
+                  paths is blocked until a certified overlay or reviewer exception exists (mock rule).
+                </p>
+                <ul style={{ margin: 0, paddingLeft: "1.25rem", fontSize: "0.875rem" }}>
+                  {policyConflicts.map((r) => (
+                    <li key={r.id}>{r.name}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+            <section
+              aria-labelledby="dp-matrix-h"
+              data-testid="data-products-policy-matrix"
+              style={{
+                marginBottom: 20,
+                padding: "12px 14px",
+                border: "1px solid var(--color-border)",
+                borderRadius: "var(--radius-lg)",
+                background: "var(--color-surface)",
+              }}
+            >
+              <h2 id="dp-matrix-h" style={{ margin: "0 0 8px", fontSize: "0.9375rem" }}>
+                Extract eligibility matrix (demo)
+              </h2>
+              <p style={{ margin: "0 0 10px", fontSize: "0.8125rem", color: "var(--color-text-muted)", lineHeight: 1.45 }}>
+                Invalid combinations show as <strong>conflict</strong>. Certified and community streams stay visually
+                distinct per product rules.
+              </p>
+              <div style={{ overflowX: "auto" }}>
+                <table
+                  style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.8125rem" }}
+                  aria-label="Entity type versus ingestion tier eligibility (read-only demo)"
+                >
+                  <thead>
+                    <tr>
+                      <th style={{ textAlign: "left", padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>
+                        Entity
+                      </th>
+                      <th style={{ textAlign: "left", padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>
+                        Certified path
+                      </th>
+                      <th style={{ textAlign: "left", padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>
+                        Community path
+                      </th>
+                      <th style={{ textAlign: "left", padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>
+                        Live widget
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style={{ padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>Competition</td>
+                      <td style={{ padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>Allowed</td>
+                      <td style={{ padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>Review</td>
+                      <td style={{ padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>Review</td>
+                    </tr>
+                    <tr>
+                      <td style={{ padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>Match</td>
+                      <td style={{ padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>Allowed</td>
+                      <td style={{ padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>
+                        <strong>Conflict</strong> if live
+                      </td>
+                      <td style={{ padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>Blocked</td>
+                    </tr>
+                    <tr>
+                      <td style={{ padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>Player</td>
+                      <td style={{ padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>Allowed</td>
+                      <td style={{ padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>Restricted</td>
+                      <td style={{ padding: "6px 8px", borderBottom: "1px solid var(--color-border)" }}>Blocked</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </>
+        ) : null}
+
         <FilterBar
           analyticsId="data_products"
           disabled={filtersDisabled}

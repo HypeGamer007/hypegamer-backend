@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hypegamer.dev/schemas/integrator-demo.schema.json",
+  "title": "Integrator hub demo fixture",
+  "type": "object",
+  "required": ["version", "demoDisclaimer", "pipelineEvents", "mappingRequirements", "readinessSummary", "plugins", "roiNarrative"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "demoDisclaimer": { "type": "string", "minLength": 1 },
+    "pipelineEvents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "at", "level", "channel", "message"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "at": { "type": "string", "format": "date-time" },
+          "level": { "type": "string", "enum": ["info", "warn", "error"] },
+          "channel": { "type": "string" },
+          "message": { "type": "string" },
+          "requestId": { "type": "string" }
+        }
+      }
+    },
+    "mappingRequirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "category", "status", "provenanceNote"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "category": { "type": "string" },
+          "status": { "type": "string", "enum": ["present", "partial", "missing"] },
+          "provenanceNote": { "type": "string" }
+        }
+      }
+    },
+    "readinessSummary": {
+      "type": "object",
+      "required": ["green", "amber", "red", "headline"],
+      "additionalProperties": false,
+      "properties": {
+        "green": { "type": "integer", "minimum": 0 },
+        "amber": { "type": "integer", "minimum": 0 },
+        "red": { "type": "integer", "minimum": 0 },
+        "headline": { "type": "string" }
+      }
+    },
+    "plugins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "kind", "readiness", "missingForGreen", "upliftLowUsd", "upliftHighUsd"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "kind": {
+            "type": "string",
+            "enum": ["widget", "export", "tournament_tool", "broadcast_partner"]
+          },
+          "partnerName": { "type": ["string", "null"] },
+          "readiness": { "type": "string", "enum": ["green", "amber", "red"] },
+          "missingForGreen": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "upliftLowUsd": { "type": "number", "minimum": 0 },
+          "upliftHighUsd": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "roiNarrative": {
+      "type": "object",
+      "required": ["title", "body", "methodology"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "methodology": { "type": "string" }
+      }
+    }
+  }
+}

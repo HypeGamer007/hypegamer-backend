@@ -7,6 +7,7 @@ import { useRouteFixture } from "@/hooks/useRouteFixture";
 import { seedDemoWorkspace } from "@/lib/seedDemoWorkspace";
 import { STORAGE_DEMO_SEEDED } from "@/lib/storageKeys";
 import { track } from "@/lib/telemetry";
+import { GOVERNANCE_DEMO } from "@/mocks/governance.demo";
 import { DEMO_SOURCES } from "@/mocks/operational.demo";
 import { getSourceStatusOverride } from "@/lib/sourceOverrides";
 import { freshnessFromIso } from "@/lib/freshness";
@@ -60,6 +61,42 @@ export function HomePage() {
       { fresh: 0, stale: 0, old: 0, unknown: 0 }
     );
     return { counts, freshness };
+  }, [demoSeeded]);
+
+  const governanceSnapshot = useMemo(() => {
+    if (!demoSeeded) return null;
+    const pendingGrants = GOVERNANCE_DEMO.partners.filter((p) => p.status === "pending").length;
+    const trustFollowUps = GOVERNANCE_DEMO.trustSignals.filter((s) => s.state !== "closed").length;
+    return { pendingGrants, trustFollowUps };
+  }, [demoSeeded]);
+
+  const activityFeed = useMemo(() => {
+    if (!demoSeeded) return [];
+    const auditLines = GOVERNANCE_DEMO.auditActivity.slice(0, 3).map((e) => ({
+      key: e.id,
+      node: (
+        <span>
+          {new Date(e.occurredAt).toLocaleString()} — <strong>{e.verb}</strong> — {e.objectLabel}{" "}
+          <Link to="/settings" style={{ color: "var(--color-accent)", fontWeight: 600 }}>
+            Audit
+          </Link>
+        </span>
+      ),
+    }));
+    return [
+      {
+        key: "sync",
+        node: (
+          <span>
+            Source sync completed — Spectator Match Feed ·{" "}
+            <Link to="/sources" style={{ color: "var(--color-accent)", fontWeight: 600 }}>
+              Sources
+            </Link>
+          </span>
+        ),
+      },
+      ...auditLines,
+    ];
   }, [demoSeeded]);
 
   return (
@@ -141,11 +178,61 @@ export function HomePage() {
                   <Link className={styles.quickLink} to="/developers">
                     Developers
                   </Link>
+                  <span className={styles.quickSep} aria-hidden>
+                    ·
+                  </span>
+                  <Link className={styles.quickLink} to="/integrator">
+                    Integrator hub
+                  </Link>
+                  <span className={styles.quickSep} aria-hidden>
+                    ·
+                  </span>
+                  <Link className={styles.quickLink} to="/partners">
+                    Partners
+                  </Link>
+                  <span className={styles.quickSep} aria-hidden>
+                    ·
+                  </span>
+                  <Link className={styles.quickLink} to="/trust">
+                    Trust
+                  </Link>
+                  <span className={styles.quickSep} aria-hidden>
+                    ·
+                  </span>
+                  <Link className={styles.quickLink} to="/settings">
+                    Settings
+                  </Link>
+                  <span className={styles.quickSep} aria-hidden>
+                    ·
+                  </span>
+                  <Link className={styles.quickLink} to="/search">
+                    Search
+                  </Link>
                 </nav>
               ) : null}
             </header>
 
             <div className={styles.grid}>
+              {demoSeeded ? (
+                <section
+                  className={styles.card}
+                  aria-labelledby="integrator-cta-heading"
+                  data-testid="home-integrator-cta"
+                >
+                  <h2 id="integrator-cta-heading" className={styles.cardTitle}>
+                    Integrator journey
+                  </h2>
+                  <p className={styles.muted}>
+                    Connect → pipeline → readiness in one mock hub. Fixtures and telemetry only — your team wires live
+                    streams later.
+                  </p>
+                  <p style={{ margin: 0 }}>
+                    <Link className={styles.quickLink} to="/integrator?tab=connect">
+                      Open Integrator hub
+                    </Link>
+                  </p>
+                </section>
+              ) : null}
               <section className={styles.card} aria-labelledby="health-heading">
                 <h2 id="health-heading" className={styles.cardTitle}>
                   Source health
@@ -177,12 +264,36 @@ export function HomePage() {
                 )}
               </section>
 
+              {demoSeeded && governanceSnapshot ? (
+                <section className={styles.card} aria-labelledby="gov-heading" data-testid="home-governance-card">
+                  <h2 id="gov-heading" className={styles.cardTitle}>
+                    Governance snapshot
+                  </h2>
+                  <ul className={styles.list}>
+                    <li>
+                      Pending partner grants:{" "}
+                      <Link to="/partners?status=pending">{governanceSnapshot.pendingGrants}</Link>
+                    </li>
+                    <li>
+                      Trust signals (open or triaged):{" "}
+                      <Link to="/trust">{governanceSnapshot.trustFollowUps}</Link>
+                    </li>
+                    <li>
+                      <Link to="/settings">Workspace audit & retention</Link>
+                    </li>
+                  </ul>
+                  <p className={styles.muted}>
+                    Certified and community paths stay separated in grants and integrity reviews (mock data).
+                  </p>
+                </section>
+              ) : null}
+
               <section className={styles.card} aria-labelledby="comp-heading">
           <h2 id="comp-heading" className={styles.cardTitle}>
             Live competitions
           </h2>
           {demoSeeded ? (
-            <p className={styles.muted}>Spring Invitational — live</p>
+            <p className={styles.muted}>Ancient Major — live</p>
           ) : (
             <EmptyState
               analyticsId="home-competitions"
@@ -203,7 +314,9 @@ export function HomePage() {
           </h2>
           {demoSeeded ? (
             <ul className={styles.list}>
-              <li>Source sync completed — Official Event Feed</li>
+              {activityFeed.map((item) => (
+                <li key={item.key}>{item.node}</li>
+              ))}
             </ul>
           ) : (
             <EmptyState

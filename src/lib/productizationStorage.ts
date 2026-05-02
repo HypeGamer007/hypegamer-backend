@@ -2,6 +2,7 @@ import {
   STORAGE_EXTRA_API_KEYS,
   STORAGE_EXTRA_DATA_PRODUCTS,
   STORAGE_WIDGET_PUBLISHED_IDS,
+  STORAGE_WIDGET_UNPUBLISHED_IDS,
 } from "@/lib/storageKeys";
 import type { ApiKeyRow, DataProductRow } from "@/mocks/productization.demo";
 
@@ -27,9 +28,30 @@ export function readWidgetPublishedIds(): Set<string> {
   return new Set(ids);
 }
 
+export function readWidgetUnpublishedIds(): Set<string> {
+  const ids = parseJson<string[]>(localStorage.getItem(STORAGE_WIDGET_UNPUBLISHED_IDS), []);
+  return new Set(ids);
+}
+
 export function addWidgetPublishedId(widgetId: string) {
+  removeWidgetUnpublishedId(widgetId);
   const next = [...readWidgetPublishedIds(), widgetId];
   localStorage.setItem(STORAGE_WIDGET_PUBLISHED_IDS, JSON.stringify(next));
+}
+
+export function removeWidgetPublishedId(widgetId: string) {
+  const next = [...readWidgetPublishedIds()].filter((id) => id !== widgetId);
+  localStorage.setItem(STORAGE_WIDGET_PUBLISHED_IDS, JSON.stringify(next));
+}
+
+export function addWidgetUnpublishedId(widgetId: string) {
+  const next = [...readWidgetUnpublishedIds(), widgetId];
+  localStorage.setItem(STORAGE_WIDGET_UNPUBLISHED_IDS, JSON.stringify([...new Set(next)]));
+}
+
+export function removeWidgetUnpublishedId(widgetId: string) {
+  const next = [...readWidgetUnpublishedIds()].filter((id) => id !== widgetId);
+  localStorage.setItem(STORAGE_WIDGET_UNPUBLISHED_IDS, JSON.stringify(next));
 }
 
 export function readExtraApiKeys(): ApiKeyRow[] {

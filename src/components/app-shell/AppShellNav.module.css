@@ -1,0 +1,195 @@
+.headerMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+.nav {
+  min-width: 0;
+}
+
+.navRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-1);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.pill {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.pill:hover {
+  color: var(--color-text);
+  background: var(--color-surface-elevated);
+  border-color: var(--color-border-hud);
+  box-shadow: var(--shadow-hud-inset);
+}
+
+.pillActive {
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-hud) 10%, var(--color-surface-elevated));
+  border-color: color-mix(in srgb, var(--color-hud) 35%, var(--color-border));
+  box-shadow: var(--shadow-hud-inset), 0 0 0 1px color-mix(in srgb, var(--color-hud) 20%, transparent);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.summary {
+  list-style: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: var(--space-2) var(--space-3);
+  padding-right: calc(var(--space-3) + 10px);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  position: relative;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 0;
+  height: 0;
+  margin-top: -2px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--color-text-muted);
+  opacity: 0.85;
+}
+
+.summary:hover {
+  color: var(--color-text);
+  background: var(--color-surface-elevated);
+  border-color: var(--color-border-hud);
+}
+
+.summaryActive {
+  color: var(--color-text);
+  border-color: color-mix(in srgb, var(--color-hud) 30%, var(--color-border));
+  background: color-mix(in srgb, var(--color-hud) 8%, var(--color-surface-elevated));
+}
+
+.dropdown[open] > .summary {
+  color: var(--color-text);
+  background: var(--color-surface-elevated);
+  border-color: var(--color-border-hud);
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 220px;
+  max-width: min(320px, 92vw);
+  padding: var(--space-2);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-elevated);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.45),
+    0 0 0 1px color-mix(in srgb, var(--color-hud) 12%, transparent);
+  z-index: 60;
+}
+
+.panelList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.panelLink {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.panelLink:hover {
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  color: var(--color-text);
+}
+
+.panelLinkActive {
+  background: color-mix(in srgb, var(--color-hud) 14%, transparent);
+  color: var(--color-text);
+  box-shadow: inset 3px 0 0 0 var(--color-hud);
+}
+
+.searchLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-elevated);
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.searchLink:hover {
+  color: var(--color-text);
+  border-color: var(--color-border-hud);
+  box-shadow: var(--shadow-hud-inset);
+}
+
+.searchLinkActive {
+  color: var(--color-hud);
+  border-color: color-mix(in srgb, var(--color-hud) 45%, var(--color-border));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-hud) 25%, transparent);
+}
+
+.searchIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: block;
+}

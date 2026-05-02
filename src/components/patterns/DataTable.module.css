@@ -1,8 +1,9 @@
 .tableWrap {
   overflow-x: auto;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-hud);
   border-radius: var(--radius-lg);
-  background: var(--color-surface);
+  background: var(--surface-panel-bg);
+  box-shadow: var(--shadow-hud-panel);
 }
 
 .table {
@@ -34,7 +35,11 @@ tbody tr:last-child .td {
 }
 
 .clickRow:hover .td {
-  background: color-mix(in srgb, var(--color-accent) 6%, transparent);
+  background: color-mix(in srgb, var(--color-accent) 5%, color-mix(in srgb, var(--color-hud) 5%, transparent));
+}
+
+.clickRow:hover .td:first-child {
+  box-shadow: inset 3px 0 0 0 var(--color-hud);
 }
 
 .clickRow:focus-visible {

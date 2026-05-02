@@ -108,19 +108,51 @@ events:
     payload:
       widgetId: string
       environment: string
+  - name: widget_unpublished
+    phase: 3
+    trigger: sandbox widget unpublish confirmed (demo persistence)
+    payload:
+      widgetId: string
+      environment: string
   - name: api_key_created
     phase: 3
     trigger: new API key generated
     payload:
       projectId: string
       keyType: string
+  - name: integrator_hub_viewed
+    phase: 3
+    trigger: integrator hub tab viewed or default route normalized
+    payload:
+      section: string
+      demoSeeded: boolean
+      fixture: string
   - name: partner_access_granted
     phase: 4
-    trigger: partner grant approved
+    trigger: partner grant approved, renewed, or pending grant approved (demo)
     payload:
       partnerOrgId: string
       scopeCount: number
       expiresAt: string
+      grantAction: string
+  - name: partners_directory_viewed
+    phase: 4
+    trigger: partners directory route viewed
+    payload:
+      demoSeeded: boolean
+      fixture: string
+  - name: partners_access_revoked
+    phase: 4
+    trigger: partner access revocation confirmed (demo)
+    payload:
+      partnerOrgId: string
+      reason: string
+  - name: trust_queue_viewed
+    phase: 4
+    trigger: trust queue route viewed
+    payload:
+      demoSeeded: boolean
+      fixture: string
   - name: trust_signal_reviewed
     phase: 4
     trigger: trust signal disposition submitted
@@ -135,6 +167,19 @@ events:
       actorId: string
       targetRole: string
       routeScope: string
+  - name: settings_workspace_viewed
+    phase: 4
+    trigger: workspace settings route viewed
+    payload:
+      demoSeeded: boolean
+      fixture: string
+      canEdit: boolean
+  - name: settings_retention_saved
+    phase: 4
+    trigger: audit retention preference saved (demo)
+    payload:
+      retentionDays: number
+      actorId: string
   - name: search_run
     phase: 5
     trigger: global search executed

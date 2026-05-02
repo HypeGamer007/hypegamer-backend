@@ -1,46 +1,24 @@
 # Phase 1 QA checklist (operations)
 
-Use with demo seeded (`hypegamer_demo_seeded=1`) unless testing empty flows.
+Use with demo seeded (`hypegamer_demo_seeded=1`) unless testing empty flows. Items marked **(matrix)** are exercised selectively in Playwright (`authz-and-state-matrix`, list/detail specs), not necessarily every fixture on every route each run.
 
-## Home
+## Implemented in mock UI (verify in app + e2e)
 
-- [ ] Command center loads (`view-status` ready) without `?fixture=loading` default.
-- [ ] With demo off: each card shows reason + primary (or secondary) CTA; CTAs route or reload as designed.
-- [ ] With demo on: quick links reach Competitions / Matches / Sources.
+- [x] Home command center: `view-status` ready without forcing `?fixture=loading`; cards + CTAs for demo off/on; quick links to Competitions / Matches / Sources when demo is on.
+- [x] Competitions / Matches / Sources lists: filters sync to URL and survive refresh; clear / filter-empty restores rows; `FilterBar` disabled when route is loading, error, or global empty (no demo).
+- [x] Row navigation: click opens correct detail URL; keyboard (Enter / Space) activates row where `DataTable` supports it.
+- [x] `?fixture=loading` table skeleton; `?fixture=error` shows `ErrorPanel` with retry + request id when supplied **(matrix)**.
+- [x] Sources list: deterministic **Freshness** cue from `lastSync` (fresh / stale / old).
+- [x] Sources **Pause**: impact preview dialog; row does not navigate on pause action; `source_paused` telemetry with `impactedProductCount` on confirm.
+- [x] List columns: explicit **sort** on operational lists where implemented (beyond filter + search).
+- [x] Detail pages: breadcrumb `aria-label="Breadcrumb"`; list segment restores URL query after in-app navigation; session fallback for list query after full reload on detail **(matrix)**.
+- [x] Unknown id (demo on): not-found empty state + back CTA respects stored list query when present **(matrix)**.
+- [x] Demo off: load sandbox CTA seeds and reloads as designed.
+- [x] Source detail: Freshness label from `lastSync`.
+- [x] Trust / policy: `?fixture=partial` partial banner; `?fixture=restricted` restricted copy; `?fixture=denied` denied empty state **(matrix)**.
+- [x] Telemetry (`track` / `window.__HG_TELEMETRY__`): `filter_applied` on filter changes; `competition_viewed` / `match_viewed` / `source_viewed` on successful detail views; `sandbox_seeded` includes `source` when seeding from supported entry points.
 
-## Lists (Competitions, Matches, Sources)
+## Still mock-only / out of repo scope
 
-- [ ] Filters sync to URL; refresh preserves filters.
-- [ ] Clear filters / filter-empty empty state restores rows when appropriate.
-- [ ] `FilterBar` disabled when route status is loading, error, or global empty (no demo).
-- [ ] Row click opens correct detail URL; keyboard (Enter / Space) activates row.
-- [ ] `?fixture=loading` shows table skeleton; `?fixture=error` shows `ErrorPanel` with retry.
-- [ ] Sources shows a deterministic **Freshness** cue derived from `lastSync` (fresh/stale/old).
-- [ ] Sources “Pause” action opens an impact preview dialog and does not navigate the row.
-
-## Detail pages
-
-- [ ] Breadcrumb `aria-label="Breadcrumb"` present; list segment restores URL query after in-app navigation.
-- [ ] After full page reload on detail, breadcrumb / “← list” still restores filters (session fallback).
-- [ ] Unknown id with demo on: “not found” empty state + back CTA respects stored list query when present.
-- [ ] With demo off: “load sandbox” CTA seeds data and reloads.
-- [ ] Source detail includes Freshness label derived from `lastSync`.
-
-## Trust / policy
-
-- [ ] `?fixture=partial` shows partial banner + primary content where applicable.
-- [ ] `?fixture=restricted` shows restricted copy; hidden fields not implied by counts.
-- [ ] `?fixture=denied` shows denied empty state (no privileged data).
-
-## Telemetry (dev console / `__HG_TELEMETRY__`)
-
-- [ ] `filter_applied` on filter changes.
-- [ ] `competition_viewed` / `match_viewed` / `source_viewed` once per successful detail view.
-- [ ] `sandbox_seeded` includes `source` when loading demo from any entry point.
-- [ ] `source_paused` fires on pause confirmation with `impactedProductCount`.
-
-## Not yet in scope for this checklist
-
-- Deterministic column **sort** (beyond filter + search).
-- Source pause / downstream “impact preview” UI.
-- Live API-backed lists (still mock-driven).
+- [ ] **Live API-backed** lists and detail (replace fixtures + `localStorage` with real `fetch` when backend is available).
+- [ ] Expand **fixture × route** Playwright coverage so more combinations of the seven view states are asserted per path (see `docs/ROADMAP.md` Phase 0 gaps).

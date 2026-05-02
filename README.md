@@ -9,11 +9,20 @@ This repository is a phase-based UX implementation pack for Cursor-driven delive
 ```bash
 npm install
 npm run dev
+# or: npm start
 ```
 
-Playwright starts its own dev server by default (avoids stale bundles). To reuse one you already have on port 5173: `PW_REUSE_SERVER=1 npx playwright test`.
+Then open **http://localhost:5173** (Vite default). Use `/onboarding` for the setup wizard, `/home` after onboarding, **`/integrator`** for the partner journey demo (pipeline log → plugins → ROI), and **`/developers`** for keys and webhooks.
 
-Open `/onboarding` for the setup wizard, or `/home` after completing onboarding (stored in `localStorage`).
+**Quality gates (run before PR / when wiring changes):**
+
+```bash
+npm run build
+npm test
+npx playwright test
+```
+
+Playwright starts its own dev server by default (avoids stale bundles). To reuse one you already have on port 5173: `PW_REUSE_SERVER=1 npx playwright test`. Production bundle smoke: `npm run build && npm run preview` (then open the URL Vite prints).
 
 ## Contents
 - `docs/prd`: narrative phase PRD
@@ -42,7 +51,7 @@ Open `/onboarding` for the setup wizard, or `/home` after completing onboarding 
 | 0 | **Yes** | Shell, onboarding, setup checklist, fixture-driven states, telemetry shim |
 | 1 | **Yes** | Home, three operational lists + URL filters, three detail routes, breadcrumbs, list-origin persistence, sorting, source pause + impact, freshness summary |
 | 2 | **Yes** | `/entities` + `/entities/:id`, `/identity`, demo stores, Playwright coverage |
-| 3 | **Yes (mock UI)** | `/data-products`, `/widgets`, `/developers` — lists, filters, draft/publish/reveal-once flows, Phase 3 e2e smoke |
+| 3 | **Yes (mock UI)** | `/data-products`, `/widgets`, `/developers`, **`/integrator`** — product + dev flows, Integrator hub (fixtures, e2e) |
 | 4–5 | **Planned / smoke** | Manifest + placeholder e2e; no product UI yet beyond smoke specs |
 
 See **`docs/ROADMAP.md`** for a module-by-module audit, known gaps, and suggested next build slices.

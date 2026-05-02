@@ -17,7 +17,13 @@ export type SandboxSeedSource =
   | "identity_empty"
   | "data_products_empty"
   | "widgets_empty"
-  | "developers_empty";
+  | "developers_empty"
+  | "integrator_empty"
+  | "partners_empty"
+  | "trust_empty"
+  | "audit_settings_empty"
+  /** One-click: checklist flags + sandbox + sample webhook delivery for Developers. */
+  | "full_demo_tour";
 
 export function seedDemoWorkspace(source: SandboxSeedSource) {
   localStorage.setItem(STORAGE_DEMO_SEEDED, "1");

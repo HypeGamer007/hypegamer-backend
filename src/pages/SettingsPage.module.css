@@ -1,0 +1,90 @@
+.card {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.h2 {
+  margin: 0 0 var(--space-2) 0;
+  font-size: 1rem;
+}
+
+.muted {
+  margin: 0 0 var(--space-2) 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+}
+
+.input {
+  width: 100%;
+  max-width: 240px;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.actions {
+  margin-top: var(--space-3);
+}
+
+.hint {
+  margin: var(--space-3) 0 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.skeletonStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.skeletonCard {
+  height: 120px;
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--color-text) 8%, transparent);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.auditToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.auditFilter {
+  flex: 1 1 220px;
+  max-width: 420px;
+}
+
+.auditScroll {
+  max-height: 320px;
+  overflow: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+  background: color-mix(in srgb, var(--color-surface) 96%, var(--color-text));
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}

@@ -1,4 +1,4 @@
-/** Shared deterministic demo rows for Phase 1 list routes. */
+/** Shared deterministic demo rows for Phase 1 list routes (MOBA / Dota-style showcase). */
 
 export interface CompetitionRow {
   id: string;
@@ -21,22 +21,22 @@ export interface MatchRow {
 export const DEMO_COMPETITIONS: CompetitionRow[] = [
   {
     id: "cmp_100",
-    name: "Spring Invitational",
-    game: "Valorant",
+    name: "Ancient Major",
+    game: "MOBA",
     status: "live",
     provenance: "Publisher authorized",
   },
   {
     id: "cmp_101",
-    name: "Community Open",
-    game: "Valorant",
+    name: "Dire Open Qualifiers",
+    game: "MOBA",
     status: "upcoming",
     provenance: "Community",
   },
   {
     id: "cmp_102",
-    name: "Rocket City Showdown",
-    game: "Rocket League",
+    name: "Rosh Pit Open",
+    game: "MOBA",
     status: "completed",
     provenance: "Publisher authorized",
   },
@@ -46,24 +46,24 @@ export const DEMO_MATCHES: MatchRow[] = [
   {
     id: "m_1001",
     competitionId: "cmp_100",
-    competition: "Spring Invitational",
-    phase: "Quarterfinal",
+    competition: "Ancient Major",
+    phase: "Upper bracket · Game 1",
     scheduledAt: "2026-06-15T18:00:00Z",
     provenance: "Publisher authorized",
   },
   {
     id: "m_1002",
     competitionId: "cmp_100",
-    competition: "Spring Invitational",
-    phase: "Quarterfinal",
+    competition: "Ancient Major",
+    phase: "Lower bracket · Decider",
     scheduledAt: "2026-06-15T20:00:00Z",
     provenance: "Community",
   },
   {
     id: "m_1003",
     competitionId: "cmp_102",
-    competition: "Rocket City Showdown",
-    phase: "Semifinal",
+    competition: "Rosh Pit Open",
+    phase: "Semifinal · Game 2",
     scheduledAt: "2026-06-16T19:00:00Z",
     provenance: "Publisher authorized",
   },
@@ -88,21 +88,21 @@ export interface SourceRow {
 export const DEMO_SOURCES: SourceRow[] = [
   {
     id: "src_ok_01",
-    displayName: "Official Event Feed",
+    displayName: "Spectator Match Feed",
     status: "healthy",
     provenance: "Publisher authorized",
     lastSync: "2026-05-10T10:00:00Z",
   },
   {
     id: "src_deg_02",
-    displayName: "Partner Bracket API",
+    displayName: "Partner Pick/Ban API",
     status: "degraded",
     provenance: "Publisher authorized",
     lastSync: "2026-05-10T08:15:00Z",
   },
   {
     id: "src_fail_03",
-    displayName: "Community Bracket Import",
+    displayName: "Open Pub Scrims Import",
     status: "failed",
     provenance: "Community",
     lastSync: "2026-05-09T08:40:00Z",

@@ -15,7 +15,7 @@ describe("entityMergeStore", () => {
     recordMergeApplied({
       fromEntityId: "player_201",
       intoEntityId: "player_200",
-      intoDisplayName: "Astra",
+      intoDisplayName: "Sable",
       confidenceBand: "medium",
       reviewerId: "integrity_reviewer",
     });
