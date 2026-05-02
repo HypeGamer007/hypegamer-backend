@@ -9,14 +9,20 @@ const DEMO_NOTIFICATIONS = [
   {
     id: "demo_trust",
     title: "Trust: net worth swing triaged (mock)",
-    body: "Fixture signal moved to triaged in your session.",
-    to: "/trust",
+    body: "Ancient Major integrity signal — same row as the Home story path.",
+    to: "/trust?q=Net+worth",
   },
   {
     id: "demo_partner",
     title: "Partner grant pending approval (mock)",
-    body: "Dire Circuit Events awaits org admin approval.",
+    body: "Dire Circuit Events awaits org admin approval (matches governance demo).",
     to: "/partners?status=pending",
+  },
+  {
+    id: "demo_widgets_policy",
+    title: "Widgets: live GPM ribbon still blocked (mock)",
+    body: "Community-backed Lane GPM snapshot keeps live publish in draft — open filtered widgets.",
+    to: "/widgets?q=GPM&preview=live",
   },
 ] as const;
 

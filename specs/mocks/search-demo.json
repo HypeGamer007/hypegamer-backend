@@ -1,13 +1,20 @@
 {
   "version": "1.0.0",
-  "hintQueries": ["ancient", "lane", "radiant", "rosh", "trust"],
+  "hintQueries": ["ancient", "lane", "spectator", "radiant", "rosh", "trust"],
   "results": [
     {
       "id": "sr_comp",
       "title": "Ancient Major",
-      "subtitle": "Tournament · certified shard feed",
-      "route": "/competitions",
+      "subtitle": "Tournament · same spine as Home story & Spectator feed",
+      "route": "/competitions/cmp_100",
       "matchTerms": ["ancient", "major", "tournament", "moba"]
+    },
+    {
+      "id": "sr_source",
+      "title": "Spectator Match Feed",
+      "subtitle": "Source · publisher-authorized shard into Ancient Major",
+      "route": "/sources/src_ok_01",
+      "matchTerms": ["spectator", "shard", "feed", "source", "match"]
     },
     {
       "id": "sr_match",

@@ -9,6 +9,7 @@ import { STORAGE_DEMO_SEEDED } from "@/lib/storageKeys";
 import { track } from "@/lib/telemetry";
 import { GOVERNANCE_DEMO } from "@/mocks/governance.demo";
 import { DEMO_SOURCES } from "@/mocks/operational.demo";
+import { buildWorkspaceStoryRun } from "@/mocks/workspaceNarrative";
 import { getSourceStatusOverride } from "@/lib/sourceOverrides";
 import { freshnessFromIso } from "@/lib/freshness";
 import styles from "./HomePage.module.css";
@@ -69,6 +70,8 @@ export function HomePage() {
     const trustFollowUps = GOVERNANCE_DEMO.trustSignals.filter((s) => s.state !== "closed").length;
     return { pendingGrants, trustFollowUps };
   }, [demoSeeded]);
+
+  const storyRun = useMemo(() => (demoSeeded ? buildWorkspaceStoryRun() : null), [demoSeeded]);
 
   const activityFeed = useMemo(() => {
     if (!demoSeeded) return [];
@@ -212,6 +215,35 @@ export function HomePage() {
               ) : null}
             </header>
 
+            {storyRun ? (
+              <section
+                className={styles.storyRun}
+                aria-labelledby="workspace-story-heading"
+                data-testid="home-workspace-story"
+              >
+                <h2 id="workspace-story-heading" className={styles.storyRunTitle}>
+                  {storyRun.headline}
+                </h2>
+                <p className={styles.storyRunLead}>{storyRun.subline}</p>
+                <ol className={styles.storySteps} aria-label="Guided demo path">
+                  {storyRun.chapters.map((ch) => (
+                    <li key={ch.step} className={styles.storyStep}>
+                      <div className={styles.storyStepHead}>
+                        <span className={styles.storyBadge} aria-hidden>
+                          {ch.step}
+                        </span>
+                        <h3 className={styles.storyStepTitle}>{ch.title}</h3>
+                      </div>
+                      <p className={styles.storyStepBody}>{ch.body}</p>
+                      <Link className={styles.storyStepLink} to={ch.to}>
+                        {ch.cta}
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            ) : null}
+
             <div className={styles.grid}>
               {demoSeeded ? (
                 <section
@@ -223,8 +255,8 @@ export function HomePage() {
                     Integrator journey
                   </h2>
                   <p className={styles.muted}>
-                    Connect → pipeline → readiness in one mock hub. Fixtures and telemetry only — your team wires live
-                    streams later.
+                    Step 7 of the Ancient Major story above — connect → pipeline → readiness in one mock hub. Fixtures and
+                    telemetry only; your team wires live streams later.
                   </p>
                   <p style={{ margin: 0 }}>
                     <Link className={styles.quickLink} to="/integrator?tab=connect">

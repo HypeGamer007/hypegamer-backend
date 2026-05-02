@@ -55,7 +55,7 @@ export function SetupChecklist() {
       {
         id: "demo",
         label: "Load sandbox data (optional)",
-        hint: "Preview lists, provenance labels, and empty-state alternatives.",
+        hint: "Unlocks the Ancient Major workspace story on Home plus cross-linked search hints.",
         done: p.demoSeeded,
         to: "/home",
         linkLabel: p.demoSeeded ? "View home" : "Load from Home",
@@ -63,7 +63,7 @@ export function SetupChecklist() {
       {
         id: "integrator",
         label: "Preview Integrator hub (optional)",
-        hint: "Pipeline log, field map, plugin readiness, and demo ROI — after sandbox is loaded.",
+        hint: "Pipeline log matches the same MOBA fixtures as Home step 7 (warn-level events).",
         done: p.integratorHubVisited,
         to: "/integrator",
         linkLabel: "Open Integrator hub",
@@ -71,7 +71,7 @@ export function SetupChecklist() {
       {
         id: "governance",
         label: "Review governance (optional)",
-        hint: "Partner grants, trust signals, workspace audit feed — mock fixtures until APIs ship.",
+        hint: "Dire Circuit + trust signals are the same rows linked from Home story steps 5–6.",
         done: p.governanceModulesVisited,
         to: "/partners",
         linkLabel: "Open Partners",

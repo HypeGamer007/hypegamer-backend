@@ -77,7 +77,8 @@ export function SearchPage() {
         badges={<EnvironmentBadge />}
       >
         <p style={{ margin: "0 0 16px", color: "var(--color-text-muted)", fontSize: "0.875rem", lineHeight: 1.45 }}>
-          Try: {SEARCH_DEMO.hintQueries.join(", ")} — results deep-link into existing screens for teaching flows.
+          Try: {SEARCH_DEMO.hintQueries.join(", ")} — results deep-link into the same Ancient Major demo spine as the
+          Home story (sources, competition detail, products, trust).
         </p>
 
         <FilterBar
