@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { runFullDemoTour } from "@/lib/runFullDemoTour";
+import { WORKSPACE_STORY_ELEMENT_ID } from "@/mocks/workspaceNarrative";
 import {
   STORAGE_DEMO_SEEDED,
   STORAGE_GOVERNANCE_MODULES_VISITED,
@@ -94,7 +95,7 @@ export function SetupChecklist() {
           data-testid="setup-run-full-demo-tour"
           onClick={() => {
             runFullDemoTour();
-            navigate("/home");
+            navigate(`/home#${WORKSPACE_STORY_ELEMENT_ID}`);
           }}
         >
           Run full MOBA demo tour

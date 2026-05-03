@@ -2,6 +2,9 @@
  * Single “Ancient Major” demo arc: copy and deep links are derived from seeded fixtures
  * (operational, productization, governance) so Home, Search, and notifications stay aligned.
  */
+
+/** DOM id + URL hash for post–demo-tour focus (`/home#workspace-story`). */
+export const WORKSPACE_STORY_ELEMENT_ID = "workspace-story";
 import { GOVERNANCE_DEMO } from "@/mocks/governance.demo";
 import { DEMO_COMPETITIONS, DEMO_SOURCES } from "@/mocks/operational.demo";
 import { DEMO_DATA_PRODUCTS, DEMO_WIDGETS } from "@/mocks/productization.demo";

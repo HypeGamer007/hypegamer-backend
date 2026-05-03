@@ -3,7 +3,8 @@ import { test, expect } from "@playwright/test";
 test("full MOBA demo tour seeds sandbox, checklist flags, and webhook sample", async ({ page }) => {
   await page.goto("/home");
   await page.getByTestId("setup-run-full-demo-tour").click();
-  await expect(page).toHaveURL(/\/home$/);
+  await expect(page).toHaveURL(/\/home#workspace-story$/);
+  await expect(page.locator("#workspace-story")).toBeFocused({ timeout: 10_000 });
   const seeded = await page.evaluate(() => localStorage.getItem("hypegamer_demo_seeded"));
   expect(seeded).toBe("1");
   const onboarding = await page.evaluate(() => localStorage.getItem("hypegamer_onboarding_complete"));

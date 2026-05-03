@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useLayoutEffect, useMemo } from "react";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { EmptyState } from "@/components/empty-state/EmptyState";
 import { RouteViewRoot } from "@/components/state/RouteViewRoot";
 import { useDemoSeeded } from "@/hooks/useDemoSeeded";
@@ -9,7 +9,7 @@ import { STORAGE_DEMO_SEEDED } from "@/lib/storageKeys";
 import { track } from "@/lib/telemetry";
 import { GOVERNANCE_DEMO } from "@/mocks/governance.demo";
 import { DEMO_SOURCES } from "@/mocks/operational.demo";
-import { buildWorkspaceStoryRun } from "@/mocks/workspaceNarrative";
+import { WORKSPACE_STORY_ELEMENT_ID, buildWorkspaceStoryRun } from "@/mocks/workspaceNarrative";
 import { getSourceStatusOverride } from "@/lib/sourceOverrides";
 import { freshnessFromIso } from "@/lib/freshness";
 import styles from "./HomePage.module.css";
@@ -72,6 +72,30 @@ export function HomePage() {
   }, [demoSeeded]);
 
   const storyRun = useMemo(() => (demoSeeded ? buildWorkspaceStoryRun() : null), [demoSeeded]);
+
+  useLayoutEffect(() => {
+    if (location.hash !== `#${WORKSPACE_STORY_ELEMENT_ID}`) return;
+    if (!demoSeeded || !storyRun) return;
+    if (status !== "ready" && status !== "partial") return;
+
+    let scrollTimer: number | undefined;
+
+    const run = () => {
+      const el = document.getElementById(WORKSPACE_STORY_ELEMENT_ID);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollTimer = window.setTimeout(() => {
+        el.focus({ preventScroll: true });
+      }, 320);
+    };
+
+    const raf = window.requestAnimationFrame(run);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      if (scrollTimer !== undefined) window.clearTimeout(scrollTimer);
+    };
+  }, [location.hash, location.pathname, demoSeeded, storyRun, status]);
 
   const activityFeed = useMemo(() => {
     if (!demoSeeded) return [];
@@ -217,6 +241,8 @@ export function HomePage() {
 
             {storyRun ? (
               <section
+                id={WORKSPACE_STORY_ELEMENT_ID}
+                tabIndex={-1}
                 className={styles.storyRun}
                 aria-labelledby="workspace-story-heading"
                 data-testid="home-workspace-story"
