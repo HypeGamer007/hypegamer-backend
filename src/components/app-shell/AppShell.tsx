@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Outlet, useLocation, useSearchParams } from "react-router-dom";
 import { AppShellNav } from "@/components/app-shell/AppShellNav";
-import { SetupChecklist } from "@/components/setup/SetupChecklist";
 import { emitSetupChanged } from "@/lib/setupEvents";
 import { track } from "@/lib/telemetry";
 import { STORAGE_ENVIRONMENT, STORAGE_GOVERNANCE_MODULES_VISITED } from "@/lib/storageKeys";
@@ -43,14 +42,9 @@ export function AppShell() {
         </div>
         <AppShellNav />
       </header>
-      <div className={styles.shellBody}>
-        <aside className={styles.checklistCol}>
-          <SetupChecklist />
-        </aside>
-        <main className={styles.mainCol}>
-          <Outlet />
-        </main>
-      </div>
+      <main className={styles.mainCol}>
+        <Outlet />
+      </main>
     </div>
   );
 }

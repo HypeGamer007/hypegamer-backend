@@ -1,0 +1,140 @@
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.card {
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-hud);
+  background: var(--surface-panel-bg);
+  box-shadow: var(--shadow-hud-panel);
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.cardLink {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cardLink:hover {
+  text-decoration: underline;
+}
+
+.stackedSvg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.barsSvg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.segHealthy {
+  fill: var(--color-success);
+}
+
+.segDegraded {
+  fill: var(--color-warning);
+}
+
+.segFailed {
+  fill: #f87171;
+}
+
+.segPaused {
+  fill: var(--color-text-muted);
+}
+
+.barFresh {
+  fill: var(--color-success);
+}
+
+.barStale {
+  fill: var(--color-accent);
+}
+
+.barOld {
+  fill: var(--color-warning);
+}
+
+.barUnknown {
+  fill: var(--color-text-muted);
+}
+
+.barLabel {
+  fill: var(--color-text-muted);
+  font-size: 11px;
+  font-family: inherit;
+}
+
+.legend {
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.dot_healthy,
+.dot_fresh {
+  background: var(--color-success);
+}
+
+.dot_degraded {
+  background: var(--color-warning);
+}
+
+.dot_failed {
+  background: #f87171;
+}
+
+.dot_paused,
+.dot_unknown {
+  background: var(--color-text-muted);
+}
+
+.dot_stale {
+  background: var(--color-accent);
+}
+
+.dot_old {
+  background: var(--color-warning);
+}

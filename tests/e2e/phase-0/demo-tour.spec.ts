@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test("full MOBA demo tour seeds sandbox, checklist flags, and webhook sample", async ({ page }) => {
   await page.goto("/home");
+  await page.getByTestId("setup-checklist-trigger").click();
   await page.getByTestId("setup-run-full-demo-tour").click();
   await expect(page).toHaveURL(/\/home#workspace-story$/);
   await expect(page.locator("#workspace-story")).toBeFocused({ timeout: 10_000 });

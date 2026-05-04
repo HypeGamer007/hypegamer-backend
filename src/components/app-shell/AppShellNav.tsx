@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { NotificationsMenu } from "@/components/app-shell/NotificationsMenu";
+import { SetupChecklistMenu } from "@/components/setup/SetupChecklistMenu";
 import styles from "./AppShellNav.module.css";
 import type { NavLinkProps } from "react-router-dom";
 
@@ -104,11 +105,12 @@ export function AppShellNav() {
           />
 
           <NavLink to="/onboarding" className={pillClass}>
-            Setup
+            Onboarding
           </NavLink>
         </div>
       </nav>
       <div className={styles.toolbar}>
+        <SetupChecklistMenu />
         <NavLink
           to="/search"
           className={({ isActive }) => `${styles.searchLink} ${isActive ? styles.searchLinkActive : ""}`}

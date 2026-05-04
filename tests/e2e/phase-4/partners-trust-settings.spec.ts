@@ -7,12 +7,12 @@ function seedWorkspace() {
   };
 }
 
-test("setup nav is available from shell", async ({ page }) => {
+test("onboarding nav is available from shell", async ({ page }) => {
   await page.goto("/home");
   await expect(page.getByRole("navigation", { name: "Primary" })).toBeVisible();
   await page
     .getByRole("navigation", { name: "Primary" })
-    .getByRole("link", { name: "Setup", exact: true })
+    .getByRole("link", { name: "Onboarding", exact: true })
     .click();
   await expect(page).toHaveURL(/\/onboarding/);
 });

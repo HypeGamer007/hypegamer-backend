@@ -224,7 +224,7 @@ export function OnboardingWizard() {
               Back
             </button>
             <button type="button" className={styles.next} onClick={handleNext}>
-              {isLast ? "Finish and open command center" : "Continue"}
+              {isLast ? "Finish and open dashboard" : "Continue"}
             </button>
           </div>
         </div>

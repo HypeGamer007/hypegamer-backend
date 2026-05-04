@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo } from "react";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { HomeStatusCharts } from "@/components/home/HomeStatusCharts";
 import { Sparkline } from "@/components/home/Sparkline";
 import { EmptyState } from "@/components/empty-state/EmptyState";
 import { RouteViewRoot } from "@/components/state/RouteViewRoot";
@@ -39,7 +40,7 @@ export function HomePage() {
 
   const partialBanner =
     fx.rawFixture === "partial"
-      ? "Some command center fields may be withheld under the current policy scope."
+      ? "Some dashboard fields may be withheld under the current policy scope."
       : undefined;
 
   const healthSummary = useMemo(() => {
@@ -171,84 +172,19 @@ export function HomePage() {
         ) : null}
 
         {status === "ready" || status === "partial" ? (
-          <>
-            <header className={styles.pageHeader}>
-              <h1 className={styles.pageTitle}>Command center</h1>
-              <p className={styles.pageSubtitle}>
-                Source health, active competitions, and what to do next.
-              </p>
+          <div className={styles.dashboard}>
+            <header className={styles.heroRow}>
+              <div className={styles.heroMain}>
+                <h1 className={styles.pageTitle}>Workspace dashboard</h1>
+                <p className={styles.pageSubtitle}>
+                  Mock operations, governance, and productization in one surface — use the header nav and Checklist menu
+                  for module jumps and guided seeding.
+                </p>
+              </div>
               {demoSeeded ? (
-                <nav className={styles.quickNav} aria-label="Workspace modules">
-                  <Link className={styles.quickLink} to="/competitions">
-                    Competitions
-                  </Link>
-                  <span className={styles.quickSep} aria-hidden>
-                    ·
-                  </span>
-                  <Link className={styles.quickLink} to="/matches">
-                    Matches
-                  </Link>
-                  <span className={styles.quickSep} aria-hidden>
-                    ·
-                  </span>
-                  <Link className={styles.quickLink} to="/sources">
-                    Sources
-                  </Link>
-                  <span className={styles.quickSep} aria-hidden>
-                    ·
-                  </span>
-                  <Link className={styles.quickLink} to="/entities">
-                    Entities
-                  </Link>
-                  <span className={styles.quickSep} aria-hidden>
-                    ·
-                  </span>
-                  <Link className={styles.quickLink} to="/data-products">
-                    Data products
-                  </Link>
-                  <span className={styles.quickSep} aria-hidden>
-                    ·
-                  </span>
-                  <Link className={styles.quickLink} to="/widgets">
-                    Widgets
-                  </Link>
-                  <span className={styles.quickSep} aria-hidden>
-                    ·
-                  </span>
-                  <Link className={styles.quickLink} to="/developers">
-                    Developers
-                  </Link>
-                  <span className={styles.quickSep} aria-hidden>
-                    ·
-                  </span>
-                  <Link className={styles.quickLink} to="/integrator">
-                    Integrator hub
-                  </Link>
-                  <span className={styles.quickSep} aria-hidden>
-                    ·
-                  </span>
-                  <Link className={styles.quickLink} to="/partners">
-                    Partners
-                  </Link>
-                  <span className={styles.quickSep} aria-hidden>
-                    ·
-                  </span>
-                  <Link className={styles.quickLink} to="/trust">
-                    Trust
-                  </Link>
-                  <span className={styles.quickSep} aria-hidden>
-                    ·
-                  </span>
-                  <Link className={styles.quickLink} to="/settings">
-                    Settings
-                  </Link>
-                  <span className={styles.quickSep} aria-hidden>
-                    ·
-                  </span>
-                  <Link className={styles.quickLink} to="/search">
-                    Search
-                  </Link>
-                </nav>
+                <span className={styles.sandboxChip} data-testid="home-sandbox-chip">
+                  Sandbox fixtures
+                </span>
               ) : null}
             </header>
 
@@ -270,6 +206,10 @@ export function HomePage() {
                   ))}
                 </ul>
               </section>
+            ) : null}
+
+            {demoSeeded && healthSummary ? (
+              <HomeStatusCharts counts={healthSummary.counts} freshness={healthSummary.freshness} />
             ) : null}
 
             {storyRun ? (
@@ -422,7 +362,7 @@ export function HomePage() {
           )}
               </section>
             </div>
-          </>
+          </div>
         ) : null}
       </div>
     </RouteViewRoot>

@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { runFullDemoTour } from "@/lib/runFullDemoTour";
-import { WORKSPACE_STORY_ELEMENT_ID } from "@/mocks/workspaceNarrative";
+import { useLocation } from "react-router-dom";
 import {
   STORAGE_DEMO_SEEDED,
   STORAGE_GOVERNANCE_MODULES_VISITED,
@@ -10,7 +8,15 @@ import {
   STORAGE_SOURCES_VISITED,
 } from "@/lib/storageKeys";
 import { subscribeSetupChanged } from "@/lib/setupEvents";
-import styles from "./SetupChecklist.module.css";
+
+export type SetupChecklistItemModel = {
+  id: string;
+  label: string;
+  hint: string;
+  done: boolean;
+  to: string;
+  linkLabel: string;
+};
 
 function readProgress() {
   return {
@@ -22,9 +28,8 @@ function readProgress() {
   };
 }
 
-export function SetupChecklist() {
+export function useSetupChecklistProgress() {
   const location = useLocation();
-  const navigate = useNavigate();
   const [p, setP] = useState(readProgress);
 
   useEffect(() => {
@@ -35,8 +40,8 @@ export function SetupChecklist() {
     return subscribeSetupChanged(() => setP(readProgress()));
   }, []);
 
-  const items = useMemo(
-    () => [
+  const items = useMemo((): SetupChecklistItemModel[] => {
+    return [
       {
         id: "onboarding",
         label: "Complete guided setup",
@@ -77,49 +82,10 @@ export function SetupChecklist() {
         to: "/partners",
         linkLabel: "Open Partners",
       },
-    ],
-    [p]
-  );
+    ];
+  }, [p]);
 
-  return (
-    <aside className={styles.root} aria-label="Setup checklist" data-testid="setup-checklist">
-      <h2 className={styles.title}>Setup checklist</h2>
-      <div className={styles.tourBlock}>
-        <p className={styles.tourLead}>
-          <strong>MOBA demo tour</strong> — seeds sandbox data, marks checklist progress, and adds a sample webhook
-          delivery so Developers and Integrator feel “live” without backends.
-        </p>
-        <button
-          type="button"
-          className={styles.tourBtn}
-          data-testid="setup-run-full-demo-tour"
-          onClick={() => {
-            runFullDemoTour();
-            navigate(`/home#${WORKSPACE_STORY_ELEMENT_ID}`);
-          }}
-        >
-          Run full MOBA demo tour
-        </button>
-      </div>
-      <ol className={styles.list}>
-        {items.map((item) => (
-          <li key={item.id} className={styles.item}>
-            <span
-              className={`${styles.check} ${item.done ? styles.checkDone : ""}`}
-              aria-hidden
-            >
-              {item.done ? "✓" : ""}
-            </span>
-            <div>
-              <p className={styles.label}>{item.label}</p>
-              <p className={styles.hint}>{item.hint}</p>
-              <Link className={styles.link} to={item.to}>
-                {item.linkLabel}
-              </Link>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </aside>
-  );
+  const incompleteCount = useMemo(() => items.filter((i) => !i.done).length, [items]);
+
+  return { items, incompleteCount };
 }

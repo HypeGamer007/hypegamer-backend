@@ -42,32 +42,11 @@
   color: var(--color-text-muted);
 }
 
-.shellBody {
-  flex: 1;
-  display: flex;
-  gap: var(--space-4);
-  align-items: flex-start;
-}
-
-.checklistCol {
-  width: 280px;
-  flex-shrink: 0;
-  padding: var(--space-5) 0 var(--space-5) var(--space-5);
-}
-
 .mainCol {
   flex: 1;
   min-width: 0;
   padding: var(--space-5);
-}
-
-@media (max-width: 960px) {
-  .shellBody {
-    flex-direction: column;
-  }
-
-  .checklistCol {
-    width: 100%;
-    padding: var(--space-4) var(--space-5) 0;
-  }
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
 }

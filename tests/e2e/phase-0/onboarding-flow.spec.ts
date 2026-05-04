@@ -30,7 +30,7 @@ test("onboarding completes and lands on home", async ({ page }) => {
   await page.getByRole("button", { name: "Continue", exact: true }).click(); // verify -> complete
   await expect(page.getByRole("heading", { name: "You are ready" })).toBeVisible();
 
-  await page.getByRole("button", { name: "Finish and open command center" }).click();
+  await page.getByRole("button", { name: "Finish and open dashboard" }).click();
   await expect(page).toHaveURL(/\/home/);
   await expect(page.getByTestId("app-shell")).toBeVisible();
   await expect(page.getByTestId("view-status")).toContainText("ready");
