@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo } from "react";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { Sparkline } from "@/components/home/Sparkline";
 import { EmptyState } from "@/components/empty-state/EmptyState";
 import { RouteViewRoot } from "@/components/state/RouteViewRoot";
 import { useDemoSeeded } from "@/hooks/useDemoSeeded";
@@ -8,6 +9,7 @@ import { seedDemoWorkspace } from "@/lib/seedDemoWorkspace";
 import { STORAGE_DEMO_SEEDED } from "@/lib/storageKeys";
 import { track } from "@/lib/telemetry";
 import { GOVERNANCE_DEMO } from "@/mocks/governance.demo";
+import { buildHomeKpiStripModel } from "@/mocks/homeKpiStrip.demo";
 import { DEMO_SOURCES } from "@/mocks/operational.demo";
 import { WORKSPACE_STORY_ELEMENT_ID, buildWorkspaceStoryRun } from "@/mocks/workspaceNarrative";
 import { getSourceStatusOverride } from "@/lib/sourceOverrides";
@@ -20,6 +22,7 @@ function readDemoSeeded(): boolean {
 
 export function HomePage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [params] = useSearchParams();
   const fixture = params.get("fixture");
   const fx = useRouteFixture();
@@ -72,6 +75,16 @@ export function HomePage() {
   }, [demoSeeded]);
 
   const storyRun = useMemo(() => (demoSeeded ? buildWorkspaceStoryRun() : null), [demoSeeded]);
+
+  const kpiTiles = useMemo(() => {
+    if (!demoSeeded || !healthSummary || !governanceSnapshot) return null;
+    return buildHomeKpiStripModel({
+      healthySources: healthSummary.counts.healthy,
+      totalSources: healthSummary.counts.total,
+      freshSources: healthSummary.freshness.fresh,
+      trustAttention: governanceSnapshot.trustFollowUps,
+    });
+  }, [demoSeeded, healthSummary, governanceSnapshot]);
 
   useLayoutEffect(() => {
     if (location.hash !== `#${WORKSPACE_STORY_ELEMENT_ID}`) return;
@@ -238,6 +251,26 @@ export function HomePage() {
                 </nav>
               ) : null}
             </header>
+
+            {kpiTiles ? (
+              <section className={styles.kpiStrip} aria-label="Workspace KPI overview" data-testid="home-kpi-strip">
+                <p className={styles.kpiStripDisclaimer}>
+                  Illustrative sparklines — deterministic mock tied to sandbox fixtures, not live telemetry.
+                </p>
+                <ul className={styles.kpiGrid}>
+                  {kpiTiles.map((t) => (
+                    <li key={t.id} className={styles.kpiItem}>
+                      <Link to={t.to} className={styles.kpiTile}>
+                        <span className={styles.kpiLabel}>{t.label}</span>
+                        <span className={styles.kpiValue}>{t.value}</span>
+                        <Sparkline values={t.series} tone={t.tone} label={t.label} />
+                        <span className={styles.kpiCaption}>{t.caption}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
 
             {storyRun ? (
               <section

@@ -1,0 +1,24 @@
+.svg {
+  display: block;
+}
+
+.line {
+  stroke: currentColor;
+  vector-effect: non-scaling-stroke;
+}
+
+.toneAccent {
+  color: var(--color-accent);
+}
+
+.toneMuted {
+  color: var(--color-text-muted);
+}
+
+.toneWarn {
+  color: var(--color-warning);
+}
+
+.toneDanger {
+  color: #f87171;
+}

@@ -23,6 +23,7 @@ test("search mock returns results for ancient query", async ({ page }) => {
 test("notifications menu opens with demo items", async ({ page }) => {
   await page.addInitScript(seedWorkspace());
   await page.goto("/home");
+  await expect(page.getByTestId("home-kpi-strip")).toBeVisible();
   await expect(page.getByTestId("home-workspace-story")).toBeVisible();
   await page.getByTestId("notifications-menu-trigger").click();
   await expect(page.getByTestId("notifications-menu-panel")).toBeVisible();

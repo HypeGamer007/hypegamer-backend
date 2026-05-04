@@ -5,6 +5,7 @@ test("full MOBA demo tour seeds sandbox, checklist flags, and webhook sample", a
   await page.getByTestId("setup-run-full-demo-tour").click();
   await expect(page).toHaveURL(/\/home#workspace-story$/);
   await expect(page.locator("#workspace-story")).toBeFocused({ timeout: 10_000 });
+  await expect(page.getByTestId("home-kpi-strip")).toBeVisible();
   const seeded = await page.evaluate(() => localStorage.getItem("hypegamer_demo_seeded"));
   expect(seeded).toBe("1");
   const onboarding = await page.evaluate(() => localStorage.getItem("hypegamer_onboarding_complete"));
